@@ -1,0 +1,55 @@
+version: "3.8"
+services:
+
+    db:
+        image: mysql
+        container_name: db_dlp
+        restart: always
+        volumes:
+            - db-data:/var/lib/mysql
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        networks:
+            - dlp
+
+    phpmyadmin:
+        image: phpmyadmin
+        container_name: phpmyadmin_dlp
+        restart: always
+        depends_on:
+            - db
+        ports:
+            - 8588:80
+        environment:
+            PMA_HOST: db
+        networks:
+            - dlp
+
+    maildev:
+        image: maildev/maildev
+        container_name: maildev_dlp
+        command: bin/maildev --web 80 --smtp 25 --hide-extensions STARTTLS
+        ports:
+            - "8586:80"
+        restart: always
+        networks:
+            - dlp
+
+    www:
+        build: php
+        container_name: base_dlp
+        ports:
+            - "8546:80"
+        volumes:
+            - ./php/vhosts:/etc/apache2/sites-enabled
+            - ./:/var/www
+        restart: always
+        networks:
+            - dlp
+
+networks:
+    dlp:
+
+        null
+volumes:
+    db-data: null
