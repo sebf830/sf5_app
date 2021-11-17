@@ -42,7 +42,7 @@ services:
             - "8546:80"
         volumes:
             - ./php/vhosts:/etc/apache2/sites-enabled
-            - ./:/var/www
+            - ./site:/var/www
         restart: always
         networks:
             - dlp
