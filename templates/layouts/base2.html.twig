@@ -25,6 +25,10 @@
 	</head>
 	<body>
 		{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+
+		{% for message in app.flashes('registration') %}
+			<p class="h3 text-success text-center mt-5">{{ message}}</p>
+		{% endfor %}
 		<main class="container"> {% block body %}{% endblock %}
 			</div>
 		</body>

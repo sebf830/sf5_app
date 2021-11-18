@@ -1,6 +1,6 @@
 {% extends 'layouts/base2.html.twig' %}
 
-{% block title %}Log in!
+{% block title %}Connexion
 {% endblock %}
 
 {% block body %}
@@ -30,8 +30,9 @@
 						Valider
 					</button>
 				</form>
-				<small>J'ai déja un compte,
-					<a href="#">Je me connecte</a>
+				<br>
+				<small>Je n'ai pas encore de compte,
+					<a href="{{ path('app_register') }}">Je m'inscris</a>
 				</small>
 			</div>
 		</div>

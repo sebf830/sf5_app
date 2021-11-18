@@ -1,0 +1,57 @@
+{% extends 'layouts/base2.html.twig' %}
+
+{% block title %}Inscription
+{% endblock %}
+
+
+{% block body %}
+	<div class="container mt-5">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 mx-auto pt-5">
+
+				{{ form_start(registrationForm) }}
+
+				<div class="row">
+					<h3>Inscription</h3>
+					<div class="col-md-6 mt-3">
+						<div class="mb-3">
+							{{ form_row(registrationForm.firstname) }}
+						</div>
+					</div>
+					<div class="col-md-6 mt-3">
+						<div class="mb-3">
+							{{ form_row(registrationForm.lastname) }}
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5">
+						<div class="mb-3">
+							{{ form_row(registrationForm.city) }}
+						</div>
+					</div>
+					<div class="col-md-7">
+						<div class="mb-3">
+							{{ form_row(registrationForm.avatar) }}
+						</div>
+					</div>
+				</div>
+				<div class="mb-3">
+					{{ form_row(registrationForm.email) }}
+				</div>
+				<div class="mb-3">
+					{{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+					{{ form_row(registrationForm.agreeTerms) }}
+				</div>
+				{{ form_row(registrationForm.submit) }}
+
+				{{ form_end(registrationForm) }}
+				<small>J'ai déja un compte,
+					<a href="{{ path('app_login') }}">Je me connecte</a>
+				</small>
+			</div>
+		</div>
+	</div>
+{% endblock %}
