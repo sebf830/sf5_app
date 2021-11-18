@@ -1,0 +1,87 @@
+body {
+    /* background-image: url('/assets/images/bg.jpeg');
+    background-repeat: repeat; */
+}
+
+/* generic */
+
+li {
+    list-style: none;
+}
+
+.brown {
+    background-color: #f5ede6;
+}
+
+.text-brown {
+    color: #804d32;
+    font-weight: bold;
+}
+
+.rad-20 {
+    border-radius: 20px;
+}
+
+.bord-light {
+    border: 1px solid lightgrey;
+}
+
+/* nav */
+
+.main-nav {
+    background-color: #219c7d;
+    border-radius: 15px;
+}
+
+.main-nav li {
+    padding: 0 24px;
+    font-size: 16px;
+}
+
+.main-nav li:hover {
+    opacity: 0.8;
+}
+
+.sub-nav-item {
+    padding: 5px 25px;
+    color: white;
+    border-radius: 20px;
+    margin: 8px 18px;
+}
+
+.sub-nav-item:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.item-green {
+    background-color: #96e0a1;
+}
+
+.item-red {
+    background-color: #ab694b;
+}
+
+/* home.main*/
+
+.list-archive li a, .list-archive li a:hover, .friend-list p a, .friend-list p a:hover {
+    text-decoration: none;
+    color: #804d32;
+}
+
+.list-archive li a:hover, .friend-list p a:hover {
+    color: #219c7d;
+}
+
+@media (max-width: 780px) {
+    .dog-banner {
+        display: none;
+    }
+}
+
+@media (max-width: 995px) {
+    .main-nav li {
+        padding: 0 15px;
+        font-size: 14px;
+    }
+}
