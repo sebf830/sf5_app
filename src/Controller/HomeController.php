@@ -2,15 +2,29 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\AnnonceRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home')]
-    public function index(): Response
+    public function index(Request $request, AnnonceRepository $annonceRepo): Response
     {
-        return $this->render('home/index.html.twig');
+        $limit = 10;
+        $page = (int)$request->query->get('page', 1);
+
+        $annonces = $annonceRepo->getPagination($page, $limit);
+        //total
+        $total = $annonceRepo->getTotalThings();
+
+        return $this->render('home/index.html.twig', [
+            'annonces' => $annonces,
+            'page' => $page,
+            'total' => $total,
+            'limit' => $limit,
+        ]);
     }
 }

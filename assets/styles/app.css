@@ -1,6 +1,6 @@
 body {
-    /* background-image: url('/assets/images/bg.jpeg');
-    background-repeat: repeat; */
+    background-image: url('/public/images/background4.jpg');
+    background-repeat: repeat;
 }
 
 /* generic */
@@ -13,9 +13,17 @@ li {
     background-color: #f5ede6;
 }
 
-.text-brown {
+.text-green {
+    color: #219c7d;
+}
+
+.bold-brown {
     color: #804d32;
     font-weight: bold;
+}
+
+.slim-brown {
+    color: #804d32;
 }
 
 .rad-20 {
@@ -71,6 +79,57 @@ li {
 
 .list-archive li a:hover, .friend-list p a:hover {
     color: #219c7d;
+}
+
+.link_card {
+    background-color: #ededed;
+    border: 1px solid grey;
+    padding: 4% 5%;
+}
+
+.list_result a {
+    padding: 8px 20px;
+    background-color: white;
+    border: 2px solid lightgrey;
+    text-align: center;
+    border-radius: 20px;
+    font-size: 14px;
+    text-decoration: none;
+    color: grey;
+}
+
+.list_result a:hover {
+    background-color: #804d32;
+    color: white;
+}
+
+.list_result_active {
+    background-color: #804d32;
+    color: white;
+}
+
+/* login */
+
+.form-control:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.form-control:focus {
+    background-color: #ededed;
+    border: 2px solid #804d32;
+}
+
+.btn-login {
+    background-color: #219c7d;
+    color: white;
+}
+
+@media (max-width: 767px) {
+    .button_link_card {
+        margin: 20px 0;
+    }
 }
 
 @media (max-width: 780px) {
