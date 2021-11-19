@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}Accueil
+{% block title %}Chats perdus
 {% endblock %}
 
 {% block body %}
@@ -9,7 +9,7 @@
 		<div class="row g-5">
 			<div class="col-md-8 brown rad-20 p-5 bord-light">
 				<h3 class="pb-4 mb-4  border-bottom bold-brown">
-					Les dernières annonces
+					Les Chats perdus
 				</h3>
 
 				{{ include('partials/nav_results.html.twig')}}
@@ -48,21 +48,14 @@
 					</div>
 				{% endfor %}
 
-				<nav aria-label="Page navigation example">
-					<ul class="pagination justify-content-center">
-						<li class="page-item  {{ page == 1 ? ' disabled' : '' }} ">
-							<a class="page-link bold-brown" href="#" tabindex="-1">Previous</a>
-						</li>
-						{% for item in 1..((total / limit) | round(0, 'ceil')) %}
-							<li class="page-item ">
-								<a class="page-link slim-brown {{ page == item ? ' text-success' : '' }}" href="?page={{ item }}">{{ item }}</a>
-							</li>
-						{% endfor %}
-						<li class="page-item  {{ page == (total / limit) | round(0, 'ceil') ? ' disabled' : '' }}">
-							<a class="page-link bold-brown" href="#">Next</a>
-						</li>
-					</ul>
-				</nav>
+				<div class="navigation">
+					{{ knp_pagination_render(annonces, null, {}, {
+   'align': 'center',
+   'size': 'large',
+   'rounded': true,
+})  }}
+				</div>
+
 				{{ include('partials/nav_results.html.twig')}}
 			</div>
 

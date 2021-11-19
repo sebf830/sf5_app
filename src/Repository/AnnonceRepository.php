@@ -24,9 +24,9 @@ class AnnonceRepository extends ServiceEntityRepository
      *
      * @param [type] $page
      * @param [type] $limit
-     * @return void
+     * @return array
      */
-    public function getPagination(string $page, int $limit)
+    public function getPagination(string $page, int $limit): array
     {
         $query = $this->createQueryBuilder('a')
             ->orderBy('a.createdAt')
@@ -38,12 +38,28 @@ class AnnonceRepository extends ServiceEntityRepository
 
     /**
      * recupere le nombre total d'annonces
-     * @return void
+     * @return int
      */
-    public function getTotalAnnonce()
+    public function getTotalAnnonce(): int
     {
         $query = $this->createQueryBuilder('a')
             ->select('COUNT(a)');
         return $query->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * Recherche les annonces qui concernent les chiens perdus
+     * @return array 
+     */
+    public function search(string $type = null, string $status = null): array
+    {
+        $query = $this->createQueryBuilder('a');
+        $query->leftJoin('a.animal', 'n');
+        $query->andWhere('n.type = :type')
+            ->setParameter('type', $type);
+        $query->andWhere('n.isLost = :status')
+            ->setParameter('status', $status);
+
+        return $query->getQuery()->getResult();
     }
 }

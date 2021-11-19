@@ -1,7 +1,7 @@
 <nav class="nav my-3 list_result d-flex justify-content-center">
-	<a href="{{ path('app_home') }}" class="{{ app.request.attributes.get('_route') == "app_home" ? 'list_result_active' : '' }}">Tous</a>
-	<a href="#">Chiens perdus</a>
-	<a href="#">Chiens trouvés</a>
-	<a href="#">Chats trouvés</a>
-	<a href="#">Chats trouvés</a>
+	<a href="{{ path('app_home') }}" class="{{ app.request.attributes.get('_route') == "app_home" ? 'bg-success text-white' : '' }}">Tous</a>
+	<a href="{{ path('app_lost_dogs') }}" class="{{ app.request.attributes.get('_route') == "app_lost_dogs" ? 'bg-success text-white' : '' }}">Chiens perdus</a>
+	<a href="{{ path('app_found_dogs') }}" class="{{ app.request.attributes.get('_route') == "app_found_dogs" ? 'bg-success text-white' : '' }}">Chiens trouvés</a>
+	<a href="{{ path('app_lost_cats') }}" class="{{ app.request.attributes.get('_route') == "app_lost_cats" ? 'bg-success text-white' : '' }}">Chats perdus</a>
+	<a href="{{ path('app_found_cats') }}" class="{{ app.request.attributes.get('_route') == "app_found_cats" ? 'bg-success text-white' : '' }}">Chats trouvés</a>
 </nav>

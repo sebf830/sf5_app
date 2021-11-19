@@ -103,14 +103,9 @@ li {
     color: white;
 }
 
-.list_result_active {
-    background-color: #804d32;
-    color: white;
-}
-
 /* login */
 
-.form-control:focus {
+.form-control:focus, li:focus, a:focus {
     border-color: inherit;
     -webkit-box-shadow: none;
     box-shadow: none;
