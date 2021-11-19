@@ -48,15 +48,19 @@ class AnnonceRepository extends ServiceEntityRepository
     }
 
     /**
-     * Recherche les annonces qui concernent les chiens perdus
+     * Recherche les annonces qui concernent les chiens ou les chats perdus
      * @return array 
      */
-    public function search(string $type = null, string $status = null): array
+    public function searchAnnoncesByAnimalAndStatus(string $type = null, string $status = null): array
     {
         $query = $this->createQueryBuilder('a');
         $query->leftJoin('a.animal', 'n');
-        $query->andWhere('n.type = :type')
-            ->setParameter('type', $type);
+
+        if ($type != null) {
+            $query->andWhere('n.type = :type')
+                ->setParameter('type', $type);
+        }
+
         $query->andWhere('n.isLost = :status')
             ->setParameter('status', $status);
 

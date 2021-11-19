@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}Chiens perdus
+{% block title %}Animaux trouvés
 {% endblock %}
 
 {% block body %}
@@ -9,7 +9,7 @@
 		<div class="row g-5">
 			<div class="col-md-8 brown rad-20 p-5 bord-light">
 				<h3 class="pb-4 mb-4  border-bottom bold-brown">
-					Les Chiens perdus
+					Les chiens et chats trouvés
 				</h3>
 
 				{{ include('partials/nav_results.html.twig')}}
@@ -32,6 +32,9 @@
 									</span><br>
 									<span class="slim-brown">Lieu :
 										<small>{{ annonce.user.city }}</small>
+									</span><br>
+									<span class="slim-brown">Race :
+										<small>{{ annonce.animal.race }}</small>
 									</span><br>
 									<span class="slim-brown">Sexe :
 										{{ annonce.animal.gender }}

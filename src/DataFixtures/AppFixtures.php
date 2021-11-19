@@ -11,18 +11,21 @@ use App\Service\LocalGouvApi;
 use App\Service\RandomUserApi;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use App\Serializer\csv\AnimalRaceSerializer;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 
 class AppFixtures extends Fixture implements FixtureGroupInterface
 {
     private RandomUserApi $randomUser;
     private LocalGouvApi $gouvApi;
+    private AnimalRaceSerializer $raceSerializer;
 
-    public function __construct(RandomUserApi $randomUser, LocalGouvApi $gouvApi)
+    public function __construct(RandomUserApi $randomUser, LocalGouvApi $gouvApi, AnimalRaceSerializer $raceSerializer)
     {
         $this->randomUser = $randomUser;
         $this->gouvApi = $gouvApi;
         $this->faker = Factory::create('fr_FR');
+        $this->raceSerializer = $raceSerializer;
     }
 
     public function load(ObjectManager $manager): void
@@ -53,9 +56,25 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
                     ->setAge($this->faker->numberBetween(5, 12))
                     ->setColor($color[$this->faker->numberBetween(0, 7)])
                     ->setIsLost($this->faker->numberBetween(0, 1))
-                    ->setPuce($this->faker->regexify('[A-Z]{5}[0-4]{5}'))
                     ->setUser($user);
                 $manager->persist($animal);
+
+                // set race
+                if ($animal->getType() == 0) {
+                    $races = $this->raceSerializer->getDataFromFile('race_chien.csv');
+                    $animal->setRace($races[$this->faker->numberBetween(0, count($races) - 1)]['race_chien']);
+                } else {
+                    $races = $this->raceSerializer->getDataFromFile('race_chat.csv');
+                    $animal->setRace($races[$this->faker->numberBetween(0, count($races) - 1)]['race_chat']);
+                }
+                $manager->persist($animal);
+
+                // set puce
+                if ($animal->getIsLost() == 1) {
+                    $animal->setPuce($this->faker->regexify('[A-Z]{5}[0-4]{5}'));
+                }
+                $manager->persist($animal);
+
 
                 $lostDate = $animal->getIsLost() == 1 ? $this->faker->dateTimeBetween('-5 week', '+1 week') : null;
                 $foundDate = $animal->getIsLost() == 0 ? $this->faker->dateTimeBetween('-5 week', '+1 week') : null;

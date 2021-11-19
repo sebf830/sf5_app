@@ -38,7 +38,7 @@
 								</li>
 								<li class="list-group-item">
 									<span class="title_span_show">Race :</span>
-									<span>pas de race particulière</span>
+									<span>{{ annonce.animal.race }}</span>
 								</li>
 								<li class="list-group-item">
 									<span class="title_span_show">Sexe :</span>
@@ -48,10 +48,12 @@
 									<span class="title_span_show">Couleur :</span>
 									<span>{{ annonce.animal.color }}</span>
 								</li>
-								<li class="list-group-item">
-									<span class="title_span_show">Age :</span>
-									<span>{{ annonce.animal.age ~' ans'}}</span>
-								</li>
+								{% if annonce.animal.isLost %}
+									<li class="list-group-item">
+										<span class="title_span_show">Age :</span>
+										<span>{{ annonce.animal.age ~' ans'}}</span>
+									</li>
+								{% endif %}
 								<li class="list-group-item">
 									<span class="title_span_show">Ville :</span>
 									<span>{{ annonce.user.city }}</span>
@@ -67,8 +69,14 @@
 										<span>{{ annonce.foundAt | date('d/m/Y') }}</span>
 									</li>
 								{% endif %}
+								{% if annonce.animal.isLost %}
+									<li class="list-group-item">
+										<span class="title_span_show">Puce :</span>
+										<span>{{ annonce.animal.puce ? annonce.animal.puce : 'non pucé'}}</span>
+									</li>
+								{% endif %}
 								<li class="list-group-item">
-									<span class="title_span_show">Santé:</span>
+									<span class="title_span_show">Santé :</span>
 									<span>Bonne santé</span>
 								</li>
 								<li class="list-group-item">

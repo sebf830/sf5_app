@@ -60,9 +60,14 @@ class Animal
     private $user;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $puce;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $race;
 
     public function __construct()
     {
@@ -196,6 +201,18 @@ class Animal
     public function setPuce(string $puce): self
     {
         $this->puce = $puce;
+
+        return $this;
+    }
+
+    public function getRace(): ?string
+    {
+        return $this->race;
+    }
+
+    public function setRace(string $race): self
+    {
+        $this->race = $race;
 
         return $this;
     }
