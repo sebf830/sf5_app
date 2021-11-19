@@ -126,6 +126,44 @@ li {
     color: white;
 }
 
+/* show annonce */
+
+.list-group-item {
+    border: none;
+}
+
+.list-group li {
+    background: white;
+}
+
+.list-group li:nth-child(odd) {
+    background: #f5ede6;
+}
+
+.list-group-item .title_span_show {
+    display: inline-block;
+    width: 140px;
+}
+
+.contact-card {
+    padding: 15px;
+    background-color: #96e0a1;
+    border: 1px solid #219c7d;
+}
+
+.contact-card a {
+    display: inline-block;
+    padding: 7px 0px;
+    background-color: #ededed;
+    border: 3px solid #219c7d;
+    margin-top: 2px;
+    text-decoration: none;
+}
+
+.contact-card a:hover {
+    color: #804d32;
+}
+
 @media (max-width: 767px) {
     .button_link_card {
         margin: 20px 0;

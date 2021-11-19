@@ -67,6 +67,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
                     ->setCreatedAt(new DateTimeImmutable())
                     ->setAnimal($animal)
                     ->setLostAt($lostDate)
+                    ->setNumero($this->faker->regexify('[A-Z]{2}[0-4]{5}'))
                     ->setFoundAt($foundDate)
                     ->setUser($user);
                 $manager->persist($annonce);

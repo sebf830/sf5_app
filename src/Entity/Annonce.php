@@ -63,6 +63,11 @@ class Annonce
      */
     private $foundAt;
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $numero;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -172,6 +177,18 @@ class Annonce
     public function setFoundAt(?\DateTimeInterface $foundAt): self
     {
         $this->foundAt = $foundAt;
+
+        return $this;
+    }
+
+    public function getNumero(): ?string
+    {
+        return $this->numero;
+    }
+
+    public function setNumero(string $numero): self
+    {
+        $this->numero = $numero;
 
         return $this;
     }

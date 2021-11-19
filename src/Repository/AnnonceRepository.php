@@ -40,7 +40,7 @@ class AnnonceRepository extends ServiceEntityRepository
      * recupere le nombre total d'annonces
      * @return void
      */
-    public function getTotalThings()
+    public function getTotalAnnonce()
     {
         $query = $this->createQueryBuilder('a')
             ->select('COUNT(a)');

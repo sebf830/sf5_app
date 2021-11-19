@@ -18,7 +18,7 @@ class HomeController extends AbstractController
 
         $annonces = $annonceRepo->getPagination($page, $limit);
         //total
-        $total = $annonceRepo->getTotalThings();
+        $total = $annonceRepo->getTotalAnnonce();
 
         return $this->render('home/index.html.twig', [
             'annonces' => $annonces,
