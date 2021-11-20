@@ -11,7 +11,7 @@ class AnimalRaceSerializer
 
     public function getDataFromFile($filename): array
     {
-        $file = 'public/data/' . $filename;
+        $file = '../public/data/' . $filename;
         $file_extension = pathinfo($file, PATHINFO_EXTENSION);
 
         $normalizers = [new ObjectNormalizer()];

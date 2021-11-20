@@ -8,15 +8,45 @@
 
 		<div class="row g-5">
 			<div class="col-md-8 rad-20 p-5 bord-light" style="background-color:#daf5e6;position:relative">
-				{# <h3 class="pb-4 mb-4  border-bottom bold-brown"> #}
-				{# Les dernières annonces #}
-				{# </h3> #}
-
-					<div class="w-100" style="padding: 0 20px; background-color:#219c7d; color:white; border-radius:20px;position:absolute;top:0;right:0;left:0;z-index:10;"> <h5 class="py-1 px-auto fst-italic">
+				<div class="w-100" style="padding: 0 20px; background-color:#219c7d; color:white; border-radius:20px;position:absolute;top:0;right:0;left:0;z-index:10;">
+					<h5 class="py-1 px-auto fst-italic">
 						<span class="text-white">
 							<i class="fas fa-paw"></i>
 						</span>
 						Rechercher un animal</h5>
+				</div>
+				<div class="row">
+					<div class="col-lg-9 mx-auto mt-5">
+
+						{{ form_start(form)}}
+						<div class="bold-brown">
+							{{ form_row(form.type)}}
+						</div>
+						<div class="bold-brown">
+							{{ form_row(form.date)}}
+						</div>
+
+						<div class="bold-brown">
+							{{ form_row(form.city)}}
+						</div>
+
+						<div class="bold-brown">
+							{{ form_row(form.race)}}
+						</div>
+
+						<div class="bold-brown">
+							{{ form_row(form.gender)}}
+						</div>
+
+						<div class="bold-brown">
+							{{ form_row(form.color)}}
+						</div>
+
+						{{ form_row(form.submit)}}
+
+
+						{{ form_end(form)}}
+					</div>
 				</div>
 			</div>
 

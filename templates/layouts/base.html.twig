@@ -18,12 +18,21 @@
 			<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 			<link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 			<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+			<link href="{{ asset('datapicker/datapicker.css') }}" rel="stylesheet">
+
+
 		{% endblock %}
 
 		{% block javascripts %}
 			{{ encore_entry_script_tags('app') }}
 			<script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
 			<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+			<script src="{{ asset('datapicker/datapicker.js') }}"></script>
+			<script>
+				jQuery(document).ready(function () {
+$('.js-datepicker').datePicker()
+});
+			</script>
 		{% endblock %}
 	</head>
 	<body>

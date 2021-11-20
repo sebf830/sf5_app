@@ -1,0 +1,98 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Recherche
+{% endblock %}
+
+{% block body %}
+
+	<div class="p-5">
+
+		<div class="row g-5">
+			<div class="col-md-8 brown rad-20 p-5 bord-light">
+				{% if annonces %}
+					{% for annonce in annonces %}
+						{% set status =  annonce.animal.isLost == 1 ? 'perdu' : 'trouvé' %}
+						{% set date =  annonce.animal.isLost == 1 ? annonce.lostAt : annonce.foundAt %}
+						<div class="p-3 bord-light rad-20 bg-white mb-2">
+							<div class="col-lg-9 mx-auto mt-5">
+								{{ form_start(form)}}
+								<div class="bold-brown">
+									{{ form_row(form.type)}}
+								</div>
+
+								<div class="bold-brown">
+									{{ form_row(form.date)}}
+								</div>
+
+								<div class="bold-brown">
+									{{ form_row(form.city)}}
+								</div>
+
+								<div class="bold-brown">
+									{{ form_row(form.race)}}
+								</div>
+
+								<div class="bold-brown">
+									{{ form_row(form.gender)}}
+								</div>
+
+								<div class="bold-brown">
+									{{ form_row(form.color)}}
+								</div>
+
+								{{ form_row(form.submit)}}
+
+								{{ form_end(form)}}
+							</div>
+
+							<div class="row">
+								<div class="col-lg-4 col-md-12 col-sm-6  text-center my-auto">
+									<img class="image_card mt-2" src="{{ annonce.image }}" alt="" width="120" height="100">
+								</div>
+								<div class="col-lg-4 col-md-12 col-sm-6 text-center py-3">
+									<p>
+										<span class="text-green">{{ annonce.animal.type | capitalize ~ ' ' ~ status}}</span><br>
+										<span class="slim-brown" style="font-size:14px">{{ status | capitalize }}
+											le :
+											{{ date | date('d/m/Y')}}
+										</span><br>
+										<span class="slim-brown">Lieu :
+											<small>{{ annonce.user.city }}</small>
+										</span><br>
+										<span class="slim-brown">Race :
+											<small>{{ annonce.animal.race }}</small>
+										</span><br>
+										<span class="slim-brown">Sexe :
+											{{ annonce.animal.gender }}
+										</span><br>
+									</p>
+								</div>
+								<div class="col-lg-4 col-md-12 col-sm-12 my-auto text-center mx-0 pb-3">
+									<div class="my-auto button_link_card">
+										<a href="{{ path('annonce_show', {numero: annonce.numero}) }}" class="link_card text-green rad-20">Voir l'annonce</a><br>
+									</div>
+								</div>
+							</div>
+
+
+						{% endfor %}
+					{% else %}
+						<h5>Rechercher un animal perdu sur Donnelapatte.com</h5>
+						<br>
+						<p class='alert alert-warning' style="border:1px solid orange">
+							<small>Votre recherche n'a donné aucun résultat</small><br>
+							<small>
+								<a href="{{ path('app_search_animal') }}" class="text-info">Effectuer une nouvelle recherche</a>
+							</small>
+						</p>
+					{% endif  %}
+				</div>
+				<div class="col-md-4">
+					<div class="position-sticky" style="top: 2rem;">
+						{{ include('partials/section_right.html.twig')}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
