@@ -22,6 +22,11 @@ li {
     font-weight: bold;
 }
 
+.bold-error {
+    color: red;
+    font-weight: bold;
+}
+
 .slim-brown {
     color: #804d32;
 }

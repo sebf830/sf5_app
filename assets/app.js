@@ -15,3 +15,31 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import 'jquery/dist/jquery.min.js'
 
 
+$('.valid_message').on('click', function (e) {
+    e.preventDefault()
+
+    var data = {
+        'title': $('#message_title').val(),
+        'content': $('#message_content').val(),
+        'id': $('#numero').val(),
+    }
+
+    if ($('#message_title').val() != "" && $('#message_content').val() != "") {
+        $.ajax({
+            method: "post",
+            url: '/send_message',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            dataType: "json",
+            data: JSON.stringify(data),
+            success: function (response) {
+                console.log(response)
+            }
+        })
+        window.location.href = ""
+        alert('salut')
+    } else {
+        $('.error_modal_login').html('Veuillez remplir tous les champs');
+    }
+})

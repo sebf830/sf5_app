@@ -1,0 +1,24 @@
+<div class="modal fade modal_message" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Ecrire à
+					{{ annonce.user.firstname  ~ ' ' ~ annonce.user.lastname }}</h5>
+				<span aria-hidden="true" class="bold-brown close" data-dismiss="modal" aria-label="Close">
+					<i class="fas fa-times-circle fa-2x"></i>
+				</span>
+			</div>
+			<div class="modal-body">
+				{{ form_start(form) }}
+				{{ form_row(form.title)}}
+				{{ form_row(form.content)}}
+			</div>
+			<input type="hidden" id="numero" name="message[numero]" value="{{ annonce.user.id }}">
+			<span class="bold-error text-center error_modal_login"></span>
+			<div class="modal-footer">
+				{{ form_row(form.submit)}}
+			</div>
+			{{ form_end(form) }}
+		</div>
+	</div>
+</div>

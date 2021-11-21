@@ -52,10 +52,9 @@ class SearchType extends AbstractType
                 'required' => false,
                 'format' => 'yyyy-MM-dd',
                 'html5' => false,
-                // 'widget' => 'single_text',
                 'attr' => [
                     'placeholder' => 'Indiquer une date',
-                    'class' => 'form-control js-datepicker'
+                    'class' => 'form-control'
                 ],
             ])
             ->add('city', TextType::class, [

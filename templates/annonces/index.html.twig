@@ -20,89 +20,100 @@
 								<small class="text-green">Veuillez contacter :</small><br>
 								<small>{{ annonce.user.firstname  ~ ' ' ~ annonce.user.lastname }}</small>
 								<br>
-									<small></small>
-									<a href="#" class="w-100 text-green">
+								{% if app.user %}
+									<a href="#" class="w-100 text-green" id="send_message" data-toggle="modal" data-target="#exampleModal">
 										<i class="far fa-envelope"></i>
-										Envoyer un email</a><br>
-									<a href="#" class="w-100 text-green">
+										Envoyer un message</a><br>
+									<a href="#" class="w-100 text-green" id="display_phone">
 										<i class="fas fa-phone"></i>
 										Afficher le nunméro
 									</a>
-								</div>
-							</div>
-
-							<ul class="list-group col-md-7 mb-3">
-								<li class="list-group-item">
-									<span class="title_span_show">Nom :</span>
-									<span>{{ annonce.animal.name }}</span>
-								</li>
-								<li class="list-group-item">
-									<span class="title_span_show">Race :</span>
-									<span>{{ annonce.animal.race }}</span>
-								</li>
-								<li class="list-group-item">
-									<span class="title_span_show">Sexe :</span>
-									<span>{{ annonce.animal.gender }}</span>
-								</li>
-								<li class="list-group-item">
-									<span class="title_span_show">Couleur :</span>
-									<span>{{ annonce.animal.color }}</span>
-								</li>
-								{% if annonce.animal.isLost %}
-									<li class="list-group-item">
-										<span class="title_span_show">Age :</span>
-										<span>{{ annonce.animal.age ~' ans'}}</span>
-									</li>
-								{% endif %}
-								<li class="list-group-item">
-									<span class="title_span_show">Ville :</span>
-									<span>{{ annonce.user.city }}</span>
-								</li>
-								{% if annonce.animal.isLost %}
-									<li class="list-group-item">
-										<span class="title_span_show">Perdu le :</span>
-										<span>{{ annonce.lostAt | date('d/m/Y') }}</span>
-									</li>
 								{% else %}
-									<li class="list-group-item">
-										<span class="title_span_show">Perdu le :</span>
-										<span>{{ annonce.foundAt | date('d/m/Y') }}</span>
-									</li>
+									<a href="#" class="w-100 text-green" data-toggle="modal" data-target="#loginModal">
+										<i class="far fa-envelope"></i>
+										Envoyer un message</a><br>
+									<a href="#" class="w-100 text-green" data-toggle="modal" data-target="#loginModal">
+										<i class="fas fa-phone"></i>
+										Afficher le nunméro
+									</a>
 								{% endif %}
-								{% if annonce.animal.isLost %}
-									<li class="list-group-item">
-										<span class="title_span_show">Puce :</span>
-										<span>{{ annonce.animal.puce ? annonce.animal.puce : 'non pucé'}}</span>
-									</li>
-								{% endif %}
-								<li class="list-group-item">
-									<span class="title_span_show">Santé :</span>
-									<span>Bonne santé</span>
-								</li>
-								<li class="list-group-item">
-									<span class="title_span_show">Description :</span><br>
-									<span>{{ annonce.description}}</span>
-								</li>
-								<li class="list-group-item">
-									<span class="title_span_show">Date annonce :</span>
-									<span>{{ annonce.createdAt | date('d/m/Y')}}</span>
-								</li>
-								<li class="list-group-item">
-									<span class="title_span_show">Contact :</span>
-									<span>{{ annonce.user.firstname  ~ ' ' ~ annonce.user.lastname }}</span>
-								</li>
-							</ul>
+							</div>
 						</div>
+
+
+						<ul class="list-group col-md-7 mb-3">
+							<li class="list-group-item">
+								<span class="title_span_show">Nom :</span>
+								<span>{{ annonce.animal.name }}</span>
+							</li>
+							<li class="list-group-item">
+								<span class="title_span_show">Race :</span>
+								<span>{{ annonce.animal.race }}</span>
+							</li>
+							<li class="list-group-item">
+								<span class="title_span_show">Sexe :</span>
+								<span>{{ annonce.animal.gender }}</span>
+							</li>
+							<li class="list-group-item">
+								<span class="title_span_show">Couleur :</span>
+								<span>{{ annonce.animal.color }}</span>
+							</li>
+							{% if annonce.animal.isLost %}
+								<li class="list-group-item">
+									<span class="title_span_show">Age :</span>
+									<span>{{ annonce.animal.age ~' ans'}}</span>
+								</li>
+							{% endif %}
+							<li class="list-group-item">
+								<span class="title_span_show">Ville :</span>
+								<span>{{ annonce.user.city }}</span>
+							</li>
+							{% if annonce.animal.isLost %}
+								<li class="list-group-item">
+									<span class="title_span_show">Perdu le :</span>
+									<span>{{ annonce.lostAt | date('d/m/Y') }}</span>
+								</li>
+							{% else %}
+								<li class="list-group-item">
+									<span class="title_span_show">Perdu le :</span>
+									<span>{{ annonce.foundAt | date('d/m/Y') }}</span>
+								</li>
+							{% endif %}
+							{% if annonce.animal.isLost %}
+								<li class="list-group-item">
+									<span class="title_span_show">Puce :</span>
+									<span>{{ annonce.animal.puce ? annonce.animal.puce : 'non pucé'}}</span>
+								</li>
+							{% endif %}
+							<li class="list-group-item">
+								<span class="title_span_show">Santé :</span>
+								<span>Bonne santé</span>
+							</li>
+							<li class="list-group-item">
+								<span class="title_span_show">Description :</span><br>
+								<span>{{ annonce.description}}</span>
+							</li>
+							<li class="list-group-item">
+								<span class="title_span_show">Date annonce :</span>
+								<span>{{ annonce.createdAt | date('d/m/Y')}}</span>
+							</li>
+							<li class="list-group-item">
+								<span class="title_span_show">Contact :</span>
+								<span>{{ annonce.user.firstname  ~ ' ' ~ annonce.user.lastname }}</span>
+							</li>
+						</ul>
 					</div>
 				</div>
+			</div>
 
-				<!-- start right col -->
-				<div class="col-md-4">
-					<div class="position-sticky" style="top: 2rem;">
-						{{ include('partials/section_right.html.twig')}}
-					</div>
+			<!-- start right col -->
+			<div class="col-md-4">
+				<div class="position-sticky" style="top: 2rem;">
+					{{ include('partials/section_right.html.twig')}}
 				</div>
 			</div>
 		</div>
 	</div>
-{% endblock %}
+</div>
+{{ include('partials/login_info_modal.html.twig') }}
+{{ include('partials/send_message_modal.html.twig') }}{% endblock %}

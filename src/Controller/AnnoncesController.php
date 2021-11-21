@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Class\Search;
 use App\Entity\Annonce;
+use App\Entity\Message;
 use App\Form\SearchType;
+use App\Form\MessageType;
 use App\Repository\AnnonceRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Serializer\csv\AnimalRaceSerializer;
@@ -33,10 +35,13 @@ class AnnoncesController extends AbstractController
     {
         $annonce = $this->annonceRepo->findOneBy(['numero' => $numero]);
 
+        $message = new Message();
+        $form = $this->createForm(MessageType::class, $message);
+
         if (!$annonce) {
             return $this->redirectToRoute('app_home');
         }
-        return $this->render('annonces/index.html.twig', ['annonce' => $annonce]);
+        return $this->render('annonces/index.html.twig', ['annonce' => $annonce,  'numero' => $numero, 'form' => $form->createView()]);
     }
 
     #[Route('/annonce-chiens-perdus', name: 'app_lost_dogs', methods: ['GET'])]
