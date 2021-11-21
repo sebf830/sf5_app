@@ -62,6 +62,20 @@ class RegistrationFormType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
+            ->add('phone', TextType::class, [
+                'constraints' => [
+                    new NotBlank(['message' => 'Veuillez remplir le champs']),
+                    new Length([
+                        'max' => 10,
+                        'maxMessage' => "La taille max est de est 10 caractères"
+                    ])
+                ],
+                'required' => true,
+                'attr' => [
+                    'label' => 'Téléphone',
+                    'class' => 'form-control'
+                ]
+            ])
             ->add('avatar', FileType::class, [
                 'label' => 'Choisir un avatar (optionnel)',
                 'required' => false,

@@ -3,10 +3,14 @@
 namespace App\Controller;
 
 use App\Class\Search;
+use App\Entity\Animal;
 use App\Entity\Annonce;
 use App\Entity\Message;
 use App\Form\SearchType;
 use App\Form\MessageType;
+use App\Form\AnnonceLostType;
+use App\Form\AnnonceFoundType;
+use App\Factory\AnnonceFactory;
 use App\Repository\AnnonceRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Serializer\csv\AnimalRaceSerializer;
@@ -22,12 +26,14 @@ class AnnoncesController extends AbstractController
     private AnimalRaceSerializer $raceSerializer;
     private AnnonceRepository $annonceRepo;
     private FlashyNotifier $flash;
+    private AnnonceFactory $factory;
 
-    public function __construct(AnnonceRepository $annonceRepo, AnimalRaceSerializer $raceSerializer, FlashyNotifier $flash)
+    public function __construct(AnnonceRepository $annonceRepo, AnimalRaceSerializer $raceSerializer, FlashyNotifier $flash, AnnonceFactory $factory)
     {
         $this->annonceRepo = $annonceRepo;
         $this->raceSerializer = $raceSerializer;
         $this->flash = $flash;
+        $this->factory = $factory;
     }
 
     #[Route('/annonce-no-{numero}', name: 'annonce_show', methods: ['GET'])]
@@ -120,9 +126,6 @@ class AnnoncesController extends AbstractController
     #[Route('/rechercher-animal', name: 'app_search_animal', methods: ['GET', 'POST'])]
     public function searchAnimal(PaginatorInterface $paginator, Request $request): Response
     {
-        $dogRace = $this->raceSerializer->getDataFromFile('race_chien.csv');
-        $catRace = $this->raceSerializer->getDataFromFile('race_chat.csv');
-
         $data = new Search();
         $form = $this->createForm(SearchType::class, $data);
 
@@ -132,13 +135,47 @@ class AnnoncesController extends AbstractController
             $annonces = $this->annonceRepo->findSearch($data);
             return $this->render(
                 'annonces/search/search_result.html.twig',
-                ['form' => $form->createView(), 'dogRace' => $dogRace, 'catRace' => $catRace, 'annonces' => $annonces]
+                ['form' => $form->createView(), 'annonces' => $annonces]
             );
         }
 
         return $this->render(
             'annonces/search/search_annonce.html.twig',
-            ['form' => $form->createView(), 'dogRace' => $dogRace, 'catRace' => $catRace]
+            ['form' => $form->createView()]
         );
+    }
+
+    #[Route('/publier-{type}-perdu', name: 'app_publish_lost', methods: ['GET', 'POST'])]
+    public function addLostAnnonce(Request $request, $type = null): Response
+    {
+        $form = $this->createForm(AnnonceLostType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $dataAnnonce = $form->getData();
+            $this->factory->makeAnnonce($dataAnnonce, $this->getUser(), $type);
+
+            $this->flash->success('Votre annonce est enregistrée et publiée', '');
+            return $this->redirectToRoute('app_home');
+        }
+        return $this->render("annonces/add/{$type}_perdu.html.twig", ['form' => $form->createView()]);
+    }
+
+    #[Route('/publier-{type}-trouve', name: 'app_publish_found', methods: ['GET', 'POST'])]
+    public function addfoundAnnonce(Request $request, $type = null): Response
+    {
+        $form = $this->createForm(AnnonceFoundType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $dataAnnonce = $form->getData();
+            $this->factory->makeAnnonce($dataAnnonce, $this->getUser(), $type);
+
+            $this->flash->success('Votre annonce est enregistrée et publiée', '');
+            return $this->redirectToRoute('app_home');
+        }
+        return $this->render("annonces/add/{$type}_trouve.html.twig", ['form' => $form->createView()]);
     }
 }

@@ -38,8 +38,9 @@ $('.valid_message').on('click', function (e) {
             }
         })
         window.location.href = ""
-        alert('salut')
     } else {
         $('.error_modal_login').html('Veuillez remplir tous les champs');
     }
 })
+
+

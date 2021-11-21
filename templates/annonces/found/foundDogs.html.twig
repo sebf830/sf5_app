@@ -20,7 +20,11 @@
 					<div class="p-3 bord-light rad-20 bg-white mb-2">
 						<div class="row">
 							<div class="col-lg-4 col-md-12 col-sm-6  text-center my-auto">
-								<img class="image_card mt-2" src="{{ annonce.image }}" alt="" width="120" height="100">
+								{% if annonce.image starts with 'https' %}
+									<img class="image_card mt-2" src="{{ annonce.image }}" alt="" width="120" height="100">
+								{% else %}
+									<img class="image_card mt-2" src=" {{ asset('uploads/' ~ annonce.image) }}" alt="" width="120" height="100">
+								{% endif %}
 							</div>
 
 							<div class="col-lg-4 col-md-12 col-sm-6 text-center py-3">
@@ -31,7 +35,7 @@
 										{{ date | date('d/m/Y')}}
 									</span><br>
 									<span class="slim-brown">Lieu :
-										<small>{{ annonce.user.city }}</small>
+										<small>{{ annonce.location }}</small>
 									</span><br>
 									<span class="slim-brown">Sexe :
 										{{ annonce.animal.gender }}

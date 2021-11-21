@@ -18,15 +18,22 @@
 			<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 			<link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 			<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+			<link href="{{ asset('jvectormap/jquery-jvectormap.css') }}" rel="stylesheet">
 		{% endblock %}
+
 
 		{% block javascripts %}
 			{{ encore_entry_script_tags('app') }}
+			<link rel="stylesheet" href="jquery-jvectormap-2.0.5.css">
+			<script src="{{ asset('jvectormap/jquery-jvectormap.js') }}"></script>
+			<script src="jquery-jvectormap-fr-merc.js"></script>
+			<script src="map-selector.js"></script>
 			<script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
 			<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		{% endblock %}
+
 	</head>
 	<body>
 		{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
@@ -34,5 +41,8 @@
 			{{ include('partials/nav.html.twig')}}
 			{% block body %}{% endblock %}
 		</div>
+
+
+		{% block javascript_custom %}{% endblock %}
 	</body>
 </html>

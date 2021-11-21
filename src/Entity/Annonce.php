@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\AnnonceRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\AnnonceRepository;
 
 /**
  * @ORM\Entity(repositoryClass=AnnonceRepository::class)
@@ -28,7 +29,7 @@ class Annonce
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
 
@@ -68,6 +69,11 @@ class Annonce
      */
     private $numero;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $location;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,7 +108,7 @@ class Annonce
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(null|string $image): self
     {
         $this->image = $image;
 
@@ -121,12 +127,12 @@ class Annonce
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(?\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -157,24 +163,24 @@ class Annonce
         return $this;
     }
 
-    public function getLostAt(): ?\DateTimeInterface
+    public function getLostAt(): ?\DateTime
     {
         return $this->lostAt;
     }
 
-    public function setLostAt(?\DateTimeInterface $lostAt): self
+    public function setLostAt(?\DateTime $lostAt): self
     {
         $this->lostAt = $lostAt;
 
         return $this;
     }
 
-    public function getFoundAt(): ?\DateTimeInterface
+    public function getFoundAt(): ?DateTime
     {
         return $this->foundAt;
     }
 
-    public function setFoundAt(?\DateTimeInterface $foundAt): self
+    public function setFoundAt(?\DateTime $foundAt): self
     {
         $this->foundAt = $foundAt;
 
@@ -189,6 +195,18 @@ class Annonce
     public function setNumero(string $numero): self
     {
         $this->numero = $numero;
+
+        return $this;
+    }
+
+    public function getLocation(): ?string
+    {
+        return $this->location;
+    }
+
+    public function setLocation(string $location): self
+    {
+        $this->location = $location;
 
         return $this;
     }

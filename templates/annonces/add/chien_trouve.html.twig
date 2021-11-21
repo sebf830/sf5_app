@@ -1,0 +1,147 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Chien trouvé
+{% endblock %}
+
+{% block body %}
+	<div class="p-5">
+
+		<div class="row g-5">
+			<div class="col-md-8 rad-20 p-0 bord-light" style="background-color:#ededed;position:relative">
+				<div class="w-100" style="padding: 0 20px; background-color:#219c7d; color:white; border-radius:20px;position:absolute;top:0;right:0;left:0;z-index:10;">
+					<h5 class="py-1 px-auto fst-italic">
+						<span class="text-white">
+							<i class="fas fa-paw"></i>
+						</span>
+						J'ai trouvé un chien</h5>
+				</div>
+				<br>
+				<div class="container mt-5">
+					<div class="row rad-20 p-2 bord-light bg-white ">
+						<small class="slim-brown text-center">En remplissant ce formulaire, votre annonce sera publiée
+							<span class="bold-brown">immédiatement</span>
+							sur notre site</small>
+						<div class="col-lg-12 mt-3">
+							<div class="row">
+								{{ form_start(form)}}
+								<div class="w-100 mx-0 px-4 rad-20 text-white" style="background-color:#804d32; border:2px solid green">
+									<small class="py-1 px-auto">Informations sur l'animal</small>
+								</div>
+								<br>
+								<div class="d-flex">
+									<div class="col-md-4 col-sm-3">
+										<div class="mb-4">
+											<label for="race" class="bold-brown">
+												Race(optionnel) :<br>
+												<small class="fst-italic slim-brown" style="font-size:12px">Indiquer la date</small>
+											</label>
+										</div>
+										<div class="mb-4">
+											<label for="race" class="bold-brown">
+												Sexe :<br>
+												<small class="fst-italic slim-brown" style="font-size:12px">Indiquer le sexe de l'animal</small>
+											</label>
+										</div>
+										<div class="mb-4">
+											<label for="race" class="bold-brown mt-1">
+												Couleur :<br>
+												<small class="fst-italic slim-brown" style="font-size:12px">Choisir une couleur
+												</small>
+											</label>
+										</div>
+										<div class="mb-4">
+											<label for="race" class="bold-brown">
+												Détails :<br>
+												<small class="fst-italic slim-brown" style="font-size:12px">Renseigner une description
+												</small>
+											</label>
+										</div>
+									</div>
+									<div class="col-md-8 col-sm-9">
+										<div class="mb-5">
+											{{ form_row(form.race) }}
+										</div>
+										<div class="mb-5">
+											{{ form_row(form.gender) }}
+										</div>
+										<div class="mb-5">
+											{{ form_row(form.color) }}
+										</div>
+										<div class="mb-5">
+											{{ form_row(form.description) }}
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="w-100 mx-0 px-4 rad-20 text-white" style="background-color:#804d32; border:2px solid green">
+									<small class="py-1 px-auto">Informations géographiques et date</small>
+								</div>
+								<br>
+								<div class="d-flex">
+									<div class="col-md-4 col-sm-3 mt-3">
+										<div class="mb-5">
+											<label for="race" class="bold-brown">
+												Date :<br>
+												<small class="fst-italic slim-brown" style="font-size:12px">Indiquer la date</small>
+											</label>
+										</div>
+										<div class="mb-5">
+											<label for="race" class="bold-brown">
+												Titre :<br>
+												<small class="fst-italic slim-brown" style="font-size:12px">Donner un titre à votre annonce</small>
+											</label>
+										</div>
+										<div class="mb-5">
+											<label for="race" class="bold-brown">
+												Ville :<br>
+												<small class="fst-italic slim-brown" style="font-size:12px">Ville ou le chien a été trouvé</small>
+											</label>
+										</div>
+										<div class="mb-5">
+											<label for="race" class="bold-brown">
+												Image (optionnel) :<br>
+												<small class="fst-italic slim-brown" style="font-size:12px">Choisir un image d'annonce</small>
+											</label>
+										</div>
+									</div>
+									<div class="col-md-8 col-sm-9">
+										<div class="mb-5">
+											{{ form_row(form.foundAt) }}
+										</div>
+										<div class="mb-3">
+											{{ form_row(form.title) }}
+										</div>
+										<br>
+										<div class="mb-4">
+											{{ form_row(form.location) }}
+										</div>
+										<br>
+										<div class="mb-5">
+											{{ form_row(form.image) }}
+										</div>
+									</div>
+								</div>
+								<br>
+								{{ form_row(form.isLost) }}
+
+								<div class="mb-3">
+									{{ form_row(form.submit) }}
+								</div>
+								{{ form_end(form)}}
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- start right col -->
+			<div class="col-md-4">
+				<div class="position-sticky" style="top: 2rem;">
+					{{ include('partials/section_right.html.twig')}}
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}

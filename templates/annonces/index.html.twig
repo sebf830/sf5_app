@@ -5,29 +5,33 @@
 
 {% block body %}
 	<div class="p-5">
-
 		<div class="row g-5">
 			<div class="col-md-8 brown rad-20 p-5 bord-light">
-				<h3 class="pb-4 mb-4  border-bottom bold-brown">
+				<h3 class="pb-4 mb-4 border-bottom bold-brown">
 					{{ '"' ~ annonce.title ~ '" : ' ~ '(annonce n° ' ~ annonce.numero ~ ')'}}
 				</h3>
 				<div class="p-3 bord-light rad-20 bg-white mb-2">
 					<div class="row">
 						<div class="col-md-5">
-							<img class="image_card" src="{{ annonce.image }}" alt="" width="270" height="350"><br>
+							{% if annonce.image starts with 'https' %}
+								<img class="image_card" src="{{ annonce.image }}" alt="" width="270" height="350">
+							{% else %}
+								<img class="image_card" src=" {{ asset('uploads/' ~ annonce.image) }}" alt="" width="270" height="350">
+							{% endif %}
+
 							<div class="contact-card mt-2 text-center">
 								<small class="text-green ">Vous avez trouvé cet animal?</small><br>
 								<small class="text-green">Veuillez contacter :</small><br>
 								<small>{{ annonce.user.firstname  ~ ' ' ~ annonce.user.lastname }}</small>
 								<br>
 								{% if app.user %}
-									<a href="#" class="w-100 text-green" id="send_message" data-toggle="modal" data-target="#exampleModal">
+									<button class="w-100 text-green btn btn-contact bg-white mb-1" id="send_message" data-toggle="modal" data-target="#exampleModal">
 										<i class="far fa-envelope"></i>
-										Envoyer un message</a><br>
-									<a href="#" class="w-100 text-green" id="display_phone">
+										Envoyer un message</button><br>
+									<button class="w-100 text-green btn btn-contact bg-white" id="display_phone">
 										<i class="fas fa-phone"></i>
-										Afficher le nunméro
-									</a>
+										<span type="button" class="annonce_phone">Afficher le nunméro</span>
+									</button>
 								{% else %}
 									<a href="#" class="w-100 text-green" data-toggle="modal" data-target="#loginModal">
 										<i class="far fa-envelope"></i>
@@ -66,7 +70,7 @@
 							{% endif %}
 							<li class="list-group-item">
 								<span class="title_span_show">Ville :</span>
-								<span>{{ annonce.user.city }}</span>
+								<span>{{ annonce.location }}</span>
 							</li>
 							{% if annonce.animal.isLost %}
 								<li class="list-group-item">
@@ -104,16 +108,16 @@
 						</ul>
 					</div>
 				</div>
-			</div>
-
-			<!-- start right col -->
-			<div class="col-md-4">
+			</div><!-- start right col --><div class="col-md-4">
 				<div class="position-sticky" style="top: 2rem;">
-					{{ include('partials/section_right.html.twig')}}
-				</div>
+					{{ include('partials/section_right.html.twig')}}</div>
 			</div>
 		</div>
 	</div>
 </div>
-{{ include('partials/login_info_modal.html.twig') }}
-{{ include('partials/send_message_modal.html.twig') }}{% endblock %}
+{{ include('partials/login_info_modal.html.twig') }}{{ include('partials/send_message_modal.html.twig') }}{% endblock %}{% block javascript_custom %}
+<script defer>
+	$('.annonce_phone').on('click', function (e) {
+$('.annonce_phone').html({{ annonce.user.phone }});
+})
+</script>{% endblock %}

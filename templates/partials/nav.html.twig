@@ -46,10 +46,10 @@
 			<p style="color:#85492e;font-size:14px;">Vous trouverez ici la liste des chiens trouvés répertoriés sur notre site. Si vous avez trouvé un chien, n'hésitez pas à l'ajouter en cliquant sur le bouton ci-dessous !</p>
 		</div>
 		<nav class="nav d-flex justify-content-center rounded p-1">
-			<a class="sub-nav-item item-red" href="#">J'ai perdu mon chien</a>
-			<a class="sub-nav-item item-green" href="#">J'ai perdu mon chat</a>
-			<a class="sub-nav-item item-red" href="#">J'ai trouvé un chien</a>
-			<a class="sub-nav-item item-green" href="#">J'ai trouvé un chat</a>
+			<a class="sub-nav-item item-red" href="{{ path('app_publish_lost', {type: 'chien'}) }}">J'ai perdu mon chien</a>
+			<a class="sub-nav-item item-green" href="{{ path('app_publish_lost', {type: 'chat'}) }}">J'ai perdu mon chat</a>
+			<a class="sub-nav-item item-red" href="{{ path('app_publish_found', {type: 'chien'}) }}">J'ai trouvé un chien</a>
+			<a class="sub-nav-item item-green" href="{{ path('app_publish_found', {type: 'chat'}) }}">J'ai trouvé un chat</a>
 		</nav>
 	</div>
 </div>

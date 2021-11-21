@@ -25,7 +25,7 @@ class Animal
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $name;
 
@@ -35,7 +35,7 @@ class Animal
     private $gender;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $age;
 
@@ -96,7 +96,7 @@ class Animal
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(null|string $name): self
     {
         $this->name = $name;
 
@@ -120,7 +120,7 @@ class Animal
         return $this->age;
     }
 
-    public function setAge(int $age): self
+    public function setAge(null|int $age): self
     {
         $this->age = $age;
 
@@ -198,7 +198,7 @@ class Animal
         return $this->puce;
     }
 
-    public function setPuce(string $puce): self
+    public function setPuce(null|string $puce): self
     {
         $this->puce = $puce;
 

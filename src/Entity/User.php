@@ -93,6 +93,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $messages_receive;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $phone;
+
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
@@ -293,7 +298,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->avatar;
     }
 
-    public function setAvatar(string $avatar): self
+    public function setAvatar(null|string $avatar): self
     {
         $this->avatar = $avatar;
 
@@ -330,35 +335,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Message[]
-     */
-    public function getMessages(): Collection
-    {
-        return $this->messages;
-    }
+    // /**
+    //  * @return Collection|Message[]
+    //  */
+    // public function getMessages(): Collection
+    // {
+    //     return $this->messages;
+    // }
 
-    public function addMessage(Message $message): self
-    {
-        if (!$this->messages->contains($message)) {
-            $this->messages[] = $message;
-            $message->setWriter($this);
-        }
+    // public function addMessage(Message $message): self
+    // {
+    //     if (!$this->messages->contains($message)) {
+    //         $this->messages[] = $message;
+    //         $message->setWriter($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeMessage(Message $message): self
-    {
-        if ($this->messages->removeElement($message)) {
-            // set the owning side to null (unless already changed)
-            if ($message->getWriter() === $this) {
-                $message->setWriter(null);
-            }
-        }
+    // public function removeMessage(Message $message): self
+    // {
+    //     if ($this->messages->removeElement($message)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($message->getWriter() === $this) {
+    //             $message->setWriter(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection|Message[]
@@ -416,6 +421,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $messagesReceive->setReceiver(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
 
         return $this;
     }

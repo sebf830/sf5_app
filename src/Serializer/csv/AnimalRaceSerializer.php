@@ -9,9 +9,9 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 class AnimalRaceSerializer
 {
 
-    public function getDataFromFile($filename): array
+    public function getDataFromFile($file): array
     {
-        $file = '../public/data/' . $filename;
+
         $file_extension = pathinfo($file, PATHINFO_EXTENSION);
 
         $normalizers = [new ObjectNormalizer()];

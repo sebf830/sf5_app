@@ -27,7 +27,7 @@ class RegistrationController extends AbstractController
 
             $image = $form->get('avatar')->getData();
             $fichier = md5(uniqid()) . '.' . $image->guessExtension();
-            $image->move($this->getParameter('images_directory'), $fichier);
+            $image->move($this->getParameter('upload_directory'), $fichier);
             $user->setAvatar($fichier);
 
             // encode the plain password
