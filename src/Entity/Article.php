@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
+use App\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ArticleRepository;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
@@ -28,7 +31,7 @@ class Article
     private $content;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime")
      */
     private $date;
 
@@ -43,9 +46,19 @@ class Article
     private $author;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="article")
      */
-    private $image;
+    private $images;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="articles" ,cascade={"remove"})
+     */
+    private $category;
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -76,12 +89,12 @@ class Article
         return $this;
     }
 
-    public function getDate(): ?\DateTimeImmutable
+    public function getDate(): ?\DateTime
     {
         return $this->date;
     }
 
-    public function setDate(\DateTimeImmutable $date): self
+    public function setDate(\DateTime $date): self
     {
         $this->date = $date;
 
@@ -112,14 +125,44 @@ class Article
         return $this;
     }
 
-    public function getImage(): ?string
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
     {
-        return $this->image;
+        return $this->images;
     }
 
-    public function setImage(string $image): self
+    public function addImage(Image $image): self
     {
-        $this->image = $image;
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getArticle() === $this) {
+                $image->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
