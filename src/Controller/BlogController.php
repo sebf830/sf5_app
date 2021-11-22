@@ -18,7 +18,7 @@ class BlogController extends AbstractController
     public function index(CategoryRepository $categoryRepo, ArticleRepository $articleRepo): Response
     {
         $categories = $categoryRepo->findAll();
-        $temoignage = $categoryRepo->findOneBy(['name' => 'témoignages']);
+        $temoignage = $categoryRepo->findOneBy(['name' => 'temoignages']);
 
         $lastArticles = $articleRepo->findAll();
         return $this->render(
@@ -45,5 +45,13 @@ class BlogController extends AbstractController
         $suggestions = $articleRepository->findBy(['category' => $article->getCategory()], [], 5, null);
 
         return $this->render('/blog/show_article.html.twig', ['article' => $article, "suggestions" => $suggestions, 'categories' => $categories]);
+    }
+
+    #[Route('/lire-les-{name}', name: 'app_show_stories')]
+    public function showStories(Category $category, ArticleRepository $articleRepository): Response
+    {
+        $stories = $articleRepository->findBy(['category' => $category]);
+
+        return $this->render('/blog/show_stories.html.twig', ['stories' => $stories]);
     }
 }

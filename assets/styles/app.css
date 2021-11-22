@@ -237,6 +237,18 @@ li {
     font-weight: bold;
 }
 
+/* story */
+
+.story-card {
+    position: relative;
+}
+
+.avatar_story {
+    position: absolute;
+    left: -39px;
+    top: 38%;
+}
+
 @media (max-width: 767px) {
     .button_link_card {
         margin: 20px 0;

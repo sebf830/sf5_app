@@ -71,7 +71,7 @@ class BlogCommand extends Command
         );
 
 
-        $categories = ['Santé et protection animal', 'conseils', 'témoignages', 'engagement', 'adoption'];
+        $categories = ['Santé et protection animal', 'conseils', 'temoignages', 'engagement', 'adoption'];
 
         for ($i = 0; $i < count($categories); $i++) {
             $category = (new Category())
@@ -83,19 +83,25 @@ class BlogCommand extends Command
 
             for ($j = 0; $j < $number; $j++) {
 
-                $article = (new Article())
-                    ->setTitle($this->faker->realTextBetween(10, 20))
-                    ->setContent(
+                $article = new Article();
+                $article->setTitle($this->faker->realTextBetween(10, 20));
+                $article->setDate($this->faker->dateTimeBetween('-20 week', '+1 week'));
+                $article->setAuthor($users[$this->faker->numberBetween(0, count($users) - 1)]);
+                $article->setCategory($category);
+                if ($category->getName() == 'temoignages') {
+                    $article->setContent($this->faker->realTextBetween(300, 900));
+                } else {
+                    $article->setContent(
                         '<p>' . $this->faker->realTextBetween(200, 400) . '</p>
                         <h5>' . $this->faker->realTextBetween(20, 50) . '</h5>
                         <p>' . $this->faker->realTextBetween(400, 700) . '</p>
                         <h5>' . $this->faker->realTextBetween(20, 50) . '</h5>
                         <p>' . $this->faker->realTextBetween(400, 700) . '</p>'
-                    )
-                    ->setDate($this->faker->dateTimeBetween('-20 week', '+1 week'))
-                    ->setAuthor($users[$this->faker->numberBetween(0, count($users) - 1)])
-                    ->setCategory($category);
+                    );
+                }
                 $this->em->persist($article);
+
+
 
                 for ($k = 0; $k < 3; $k++) {
                     $image = (new Image())
