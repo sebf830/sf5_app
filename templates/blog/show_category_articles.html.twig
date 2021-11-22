@@ -1,0 +1,55 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Accueil
+{% endblock %}
+
+{% block body %}
+	<div class="page">
+
+		<div class="container-md p-5">
+			<h4>{{ category.name }}</h4>
+			<p>{{ category.description }}</p>
+
+			<div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4 mb-4 pb-4">
+
+				{% for article in articles %}
+					<div class="col">
+						<div class="card rad-20">
+							<a href="{{ path('app_show_article', {slug: article.slug}) }}" class="hover-article-area">
+								<div class="card-header p-0 rad-20 hover-article-header">
+									<img class="card-img-top" src="{{ article.images[0] }}" alt="Placeholder">
+									<div class="hover-article text-white py-3">
+										<h5 class="mt-3">Auteur
+											{{ article.author.firstname ~ ' ' ~ article.author.lastname }}</h5>
+										<small>{{ article.date | date('Y/m/d') }}</small>
+									</div>
+								</div>
+							</a>
+							<div class="card-body p-4 rad-20" style="min-height:7em">
+								<h5 class="card-title fw-bold mb-1">{{ article.title }}</h5>
+								<p class="card-text">{{ article.content | slice(0, 50) | raw  }}
+									...
+								</p>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="navigation">
+				{{ knp_pagination_render(articles, null, {}, {
+   'align': 'center',
+   'size': 'large',
+   'rounded': true,
+})  }}
+			</div>
+
+
+		</div>
+
+
+	{% endblock %}
+	{% block javascript_custom %}
+		<script>
+			document.querySelector('#sub_header').style.display = 'none';
+		</script>
+	{% endblock %}

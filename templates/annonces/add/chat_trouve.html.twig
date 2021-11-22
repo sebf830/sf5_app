@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<div class="p-5">
+	<div class="p-4">
 
 		<div class="row g-5">
 			<div class="col-md-8 rad-20 p-0 bord-light" style="background-color:#ededed;position:relative">
@@ -29,35 +29,29 @@
 								</div>
 								<br>
 								<div class="d-flex">
-									<div class="col-md-4 col-sm-3">
-										<div class="mb-4">
+									<div class="col-lg-4">
+										<div class="mb-5">
 											<label for="race" class="bold-brown">
 												Race(optionnel) :<br>
-												<small class="fst-italic slim-brown" style="font-size:12px">Indiquer la date</small>
 											</label>
 										</div>
-										<div class="mb-4">
+										<div class="mb-5">
 											<label for="race" class="bold-brown">
 												Sexe :<br>
-												<small class="fst-italic slim-brown" style="font-size:12px">Indiquer le sexe de l'animal</small>
 											</label>
 										</div>
-										<div class="mb-4">
+										<div class="mb-5">
 											<label for="race" class="bold-brown mt-1">
 												Couleur :<br>
-												<small class="fst-italic slim-brown" style="font-size:12px">Choisir une couleur
-												</small>
 											</label>
 										</div>
-										<div class="mb-4">
+										<div class="mb-5">
 											<label for="race" class="bold-brown">
-												Détails :<br>
-												<small class="fst-italic slim-brown" style="font-size:12px">Renseigner une description
-												</small>
+												Description :<br>
 											</label>
 										</div>
 									</div>
-									<div class="col-md-8 col-sm-9">
+									<div class="col-lg-8">
 										<div class="mb-5">
 											{{ form_row(form.race) }}
 										</div>
@@ -80,22 +74,19 @@
 								<br>
 								<div class="d-flex">
 									<div class="col-md-4 col-sm-3 mt-3">
-										<div class="mb-5">
+										<div class="mb-5 mt-3">
 											<label for="race" class="bold-brown">
 												Date :<br>
-												<small class="fst-italic slim-brown" style="font-size:12px">Indiquer la date</small>
 											</label>
 										</div>
 										<div class="mb-5">
 											<label for="race" class="bold-brown">
 												Titre :<br>
-												<small class="fst-italic slim-brown" style="font-size:12px">Donner un titre à votre annonce</small>
 											</label>
 										</div>
 										<div class="mb-5">
 											<label for="race" class="bold-brown">
 												Ville :<br>
-												<small class="fst-italic slim-brown" style="font-size:12px">Ville ou le chien a été trouvé</small>
 											</label>
 										</div>
 										<div class="mb-5">
@@ -106,17 +97,16 @@
 										</div>
 									</div>
 									<div class="col-md-8 col-sm-9">
-										<div class="mb-5">
+										<div class="mb-3">
 											{{ form_row(form.foundAt) }}
 										</div>
-										<div class="mb-3">
+										<br>
+										<div class="mb-5">
 											{{ form_row(form.title) }}
 										</div>
-										<br>
-										<div class="mb-4">
+										<div class="mb-5">
 											{{ form_row(form.location) }}
 										</div>
-										<br>
 										<div class="mb-5">
 											{{ form_row(form.image) }}
 										</div>

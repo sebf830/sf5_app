@@ -24,7 +24,7 @@
 						<a class="nav-link text-white" href="{{ path('app_search_animal') }}">Recherche</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link text-white" href="#">Blog</a>
+						<a class="nav-link text-white" href="{{ path('blog') }}">Blog</a>
 					</li>
 					<li class="nav-item">
 						{% if app.user %}
@@ -41,7 +41,7 @@
 		</div>
 	</nav>
 
-	<div class="mb-2 py-2 text-center mx-3 brown rad-20" style="padding: 0 50px;border:1px solid lightgrey;">
+	<div class="mb-2 py-2 text-center mx-3 brown rad-20" style="padding: 0 50px;border:1px solid lightgrey;" id="sub_header">
 		<div>
 			<p style="color:#85492e;font-size:14px;">Vous trouverez ici la liste des chiens trouvés répertoriés sur notre site. Si vous avez trouvé un chien, n'hésitez pas à l'ajouter en cliquant sur le bouton ci-dessous !</p>
 		</div>

@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Accueil
+{% endblock %}
+
+{% block body %}
+	<div class="p-5">
+		<div class="row bg-white bord-light border">
+			<div class="col-md-9 rad-20 p-5">
+				<div class="col-md-12 text-center my-auto">
+					<h4 class="text-center bold-brown">{{ article.title }}</h4>
+					<br>
+					<div class="w-100">
+						<img style="max-width:100%" src="{{ article.images[0]}}" alt="">
+					</div>
+					<p>{{ article.content | raw}}</p>
+
+				</div>
+			</div>
+			<div class="col-md-3 text-center py-5">
+				<h5 class="mb-5">Dans la meme catégorie</h5>
+				{% for suggestion in suggestions %}
+					<a href="{{ path('app_show_article', {slug: article.slug}) }}" style="text-decoration:none;">
+						<div class="w-100">
+							<img style="max-width:85%" src="{{ suggestion.images[0]}}" alt="">
+						</div>
+						<p class="bold-brown">{{ suggestion.title }}</p>
+					</a>
+				{% endfor %}
+				<hr>
+				<h5 class="mb-3">Aller vers</h5>
+				{% for category in categories %}
+					<a class="blog_category" href="{{ path('app_article_category', {slug: category.slug}) }}">{{ category.name }}</a><br>
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block javascript_custom %}
+	<script>
+		document.querySelector('#sub_header').style.display = 'none';
+	</script>
+{% endblock %}

@@ -168,14 +168,105 @@ li {
     border: 2px solid #219c7d;
 }
 
+/* blog */
+
+.card-img-top {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.subNavTextOrange {
+    height: 18em;
+    background: orange;
+}
+
+.subNavImage {
+    height: 18em;
+}
+
+.container-subnav {
+    position: relative;
+}
+
+.engage {
+    text-decoration: none;
+}
+
+.hover-article-header {
+    position: relative;
+    overflow: hidden;
+}
+
+.hover-article {
+    display: none;
+    text-decoration: none;
+    text-align: center;
+    position: absolute;
+}
+
+.hover-article-area:hover .hover-article {
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.hover-article-header img {
+    transition: transform 1s;
+    max-width: 100%;
+}
+
+.hover-article-area:hover .hover-article-header img {
+    filter: brightness(0.4);
+    transform: scale(1.7);
+}
+
+.card-temoignage {
+    text-decoration: none;
+    transition: transform .8s;
+}
+
+.card-temoignage:hover {
+    transform: scale(105%);
+}
+
+.blog_category {
+    text-decoration: none;
+    color: green;
+    font-weight: bold;
+}
+
 @media (max-width: 767px) {
     .button_link_card {
         margin: 20px 0;
+    }
+    .subNavTextOrange {
+        height: 4em;
+        width: 85%;
+        position: absolute;
+        bottom: -20px;
+        left: 8%;
+    }
+    .engage_h3 {
+        font-size: 18px;
+        position: absolute;
+        text-align: left;
+        bottom: 20px;
+    }
+    .engage_a {
+        display: none;
     }
 }
 
 @media (max-width: 780px) {
     .dog-banner {
+        display: none;
+    }
+}
+
+@media (max-width: 991px) {
+    .engage_p {
         display: none;
     }
 }

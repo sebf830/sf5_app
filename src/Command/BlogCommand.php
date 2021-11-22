@@ -60,7 +60,7 @@ class BlogCommand extends Command
         $number = $input->getArgument('number');
         $users = $this->getUsers();
 
-        $this->io->section('Purge de la table : Category');
+        $this->io->section('Purge des tables : Category, Article et Images');
 
         $this->em->getConnection()->query(
             'SET FOREIGN_KEY_CHECKS = 0;
@@ -76,6 +76,8 @@ class BlogCommand extends Command
         for ($i = 0; $i < count($categories); $i++) {
             $category = (new Category())
                 ->setName($categories[$i])
+                ->setImage("https://loremflickr.com/640/420/animal?random={$i}")
+                ->setSlug(str_replace(' ', '-', strtolower($categories[$i])))
                 ->setDescription($this->faker->realTextBetween(100, 200));
             $this->em->persist($category);
 
@@ -83,7 +85,13 @@ class BlogCommand extends Command
 
                 $article = (new Article())
                     ->setTitle($this->faker->realTextBetween(10, 20))
-                    ->setContent($this->faker->realTextBetween(200, 400))
+                    ->setContent(
+                        '<p>' . $this->faker->realTextBetween(200, 400) . '</p>
+                        <h5>' . $this->faker->realTextBetween(20, 50) . '</h5>
+                        <p>' . $this->faker->realTextBetween(400, 700) . '</p>
+                        <h5>' . $this->faker->realTextBetween(20, 50) . '</h5>
+                        <p>' . $this->faker->realTextBetween(400, 700) . '</p>'
+                    )
                     ->setDate($this->faker->dateTimeBetween('-20 week', '+1 week'))
                     ->setAuthor($users[$this->faker->numberBetween(0, count($users) - 1)])
                     ->setCategory($category);
@@ -91,10 +99,16 @@ class BlogCommand extends Command
 
                 for ($k = 0; $k < 3; $k++) {
                     $image = (new Image())
-                        ->setName("https://loremflickr.com/640/420/{animal}?random={$k}");
+                        ->setName("https://loremflickr.com/640/420/dogs?random={$this->faker->numberBetween(0, 200)}");
 
                     $this->em->persist($image);
+
                     $article->addImage($image);
+                    $check = ['!', '?', "'", '.', ';', ','];
+                    $slug = str_replace(' ', '-', strtolower($article->getTitle()));
+                    $slug = str_replace($check, '', $slug);
+                    $article->setSlug($slug);
+
                     $this->em->persist($article);
                 }
             }
