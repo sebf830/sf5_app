@@ -87,6 +87,7 @@ class BlogCommand extends Command
                 $article->setTitle($this->faker->realTextBetween(10, 20));
                 $article->setDate($this->faker->dateTimeBetween('-20 week', '+1 week'));
                 $article->setAuthor($users[$this->faker->numberBetween(0, count($users) - 1)]);
+                $article->setPublicationStatus(1);
                 $article->setCategory($category);
                 if ($category->getName() == 'temoignages') {
                     $article->setContent($this->faker->realTextBetween(300, 900));
@@ -103,20 +104,18 @@ class BlogCommand extends Command
 
 
 
-                for ($k = 0; $k < 3; $k++) {
-                    $image = (new Image())
-                        ->setName("https://loremflickr.com/640/420/dogs?random={$this->faker->numberBetween(0, 200)}");
+                $image = (new Image())
+                    ->setName("https://loremflickr.com/640/420/dogs?random={$this->faker->numberBetween(0, 200)}");
 
-                    $this->em->persist($image);
+                $this->em->persist($image);
 
-                    $article->addImage($image);
-                    $check = ['!', '?', "'", '.', ';', ','];
-                    $slug = str_replace(' ', '-', strtolower($article->getTitle()));
-                    $slug = str_replace($check, '', $slug);
-                    $article->setSlug($slug);
+                $article->addImage($image);
+                $check = ['!', '?', "'", '.', ';', ','];
+                $slug = str_replace(' ', '-', strtolower($article->getTitle()));
+                $slug = str_replace($check, '', $slug);
+                $article->setSlug($slug);
 
-                    $this->em->persist($article);
-                }
+                $this->em->persist($article);
             }
         }
         $this->em->flush();

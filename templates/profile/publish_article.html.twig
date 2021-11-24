@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Profile
+{% endblock %}
+
+{% block body %}
+
+	<div class="container p-5">
+		<div class="p-2 border bg-white rad-20 mx-5">
+			<div class="row">
+				<div class="col-md-10 p-5 mx-auto">
+					<h5>Ecrire un article</h5>
+					{{ form_start(form)}}
+					<div class="mb-3">
+						{{ form_row(form.title)}}
+					</div>
+					<div class="mb-3">
+						{{ form_row(form.content)}}
+					</div>
+					<div class="mb-3">
+						{{ form_row(form.category)}}
+					</div>
+					<div class="col mb-3">
+						{{ form_row(form.image)}}
+					</div>
+					<div class="mt-4">
+						{{ form_row(form.submit)}}
+					</div>
+					{{ form_end(form)}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row gx-2"></div>
+{% endblock %}
+{% block javascript_custom %}
+	<script>
+		document.querySelector('#sub_header').style.display = 'none';
+	</script>
+{% endblock %}

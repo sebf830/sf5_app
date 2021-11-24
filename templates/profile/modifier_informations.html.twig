@@ -1,0 +1,46 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Profile
+{% endblock %}
+
+{% block body %}
+
+	<div class="container p-5">
+		<div class="p-2 border bg-white rad-20 mx-5">
+			<div class="row">
+				<div class="col-md-10 p-5 mx-auto">
+					<h5>Modifier mes informations</h5>
+					{{ form_start(form)}}
+					<div class="row">
+						<div class="col">{{ form_row(form.firstname)}}</div>
+						<div class="col">{{ form_row(form.lastname)}}</div>
+					</div>
+					<div class="row">
+						<div class="col">{{ form_row(form.email)}}</div>
+						<div class="col">{{ form_row(form.phone)}}</div>
+					</div>
+					{{ form_row(form.city)}}
+					<div class="row">
+						<div class="col-md-3 mt-3">
+							<img src="{{ asset('uploads/' ~ app.user.avatar) }}" alt="" width="100" height="100"><br>
+						</div>
+						<div class="col-md-9 mt-3">
+							{{ form_row(form.avatar)}}
+						</div>
+					</div>
+					<div class="mt-4">
+						{{ form_row(form.submit)}}
+					</div>
+					{{ form_end(form)}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row gx-2"></div>
+{% endblock %}
+{% block javascript_custom %}
+	<script>
+		document.querySelector('#sub_header').style.display = 'none';
+	</script>
+{% endblock %}

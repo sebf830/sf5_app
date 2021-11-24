@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}Accueil
+{% block title %}Blog
 {% endblock %}
 
 {% block body %}
@@ -28,14 +28,14 @@
 
 					{% for category in categories %}
 						{% if category.name != "temoignages" %}
-							<a href="{{ path('app_article_category', {slug: category.slug}) }}" class="text-secondary" style="text-decoration:none;">
+							<a href="{{ path('app_article_category', {slug: category.slug}) }}" class="text-secondary link_category-card" style="text-decoration:none;">
 								<div class="col">
 									<div class="card rad-20">
 										<div class="card-header p-0">
 											<img class="card-img-top" src="{{ category.image }}" alt=" placeholder">
 										</div>
 										<div class="card-body p-4" style="min-height:4em">
-											<h5 class="card-title fw-bold mb-1" style="font-size:18px">{{ category.name }}</h5>
+											<h5 class="card-title fw-bold mb-1 underline_title" style="font-size:18px">{{ category.name }}</h5>
 										</div>
 									</div>
 								</div>
@@ -58,7 +58,7 @@
 							</div>
 						</div>
 					</a>
-					<a href="" class="card-temoignage">
+					<a href="{{ path('app_publish_story', {name: 'temoignages'}) }}" class="card-temoignage">
 						<div class="col">
 							<div class="card rad-20">
 								<div class="card-header p-0 rad-20">

@@ -58,7 +58,10 @@
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">
 						<li class="page-item  {{ page == 1 ? ' disabled' : '' }} ">
-							<a class="page-link bold-brown" href="#" tabindex="-1">Previous</a>
+							<a class="page-link bold-brown" href="?page={{ page  - 1}}" tabindex="-1">
+								&laquo;&nbsp;
+								<i class="fas fa-paw"></i>
+							</a>
 						</li>
 						{% for item in 1..((total / limit) | round(0, 'ceil')) %}
 							<li class="page-item ">
@@ -66,7 +69,10 @@
 							</li>
 						{% endfor %}
 						<li class="page-item  {{ page == (total / limit) | round(0, 'ceil') ? ' disabled' : '' }}">
-							<a class="page-link bold-brown" href="#">Next</a>
+							<a class="page-link bold-brown" href="?page={{ page + 1}}">
+								<i class="fas fa-paw"></i>
+								&nbsp;&raquo;
+							</a>
 						</li>
 					</ul>
 				</nav>

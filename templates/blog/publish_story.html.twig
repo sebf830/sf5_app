@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Accueil
+{% endblock %}
+
+{% block body %}
+	<div class="p-5">
+		<div class="row bg-white bord-light border">
+			<div class="col-md-9 rad-20 container-card-story">
+				<div class="col-md-12 my-auto">
+					<h4 class="text-center">Partagez votre aventure!</h4>
+					<p class="text-center">Votre animal était perdu et vous l'avez retrouvé grâce à notre site? Racontez nous votre histoire et redonnez de l'espoir à nos membres qui sont dans l'attente.</p>
+
+					{{ form_start(form)}}
+					<div class="mt-5 mb-3">
+						{{ form_row(form.content)}}
+					</div>
+					{{ form_row(form.submit)}}
+					{{ form_end(form)}}
+				</div>
+			</div>
+			<div class="col-md-3 text-center py-5">
+				<h5 class="mb-5">Voir aussi</h5>
+				{% for suggestion in suggestions %}
+					<a href="{{ path('app_show_article', {slug: suggestion.slug}) }}" style="text-decoration:none;">
+						<div class="w-100">
+							<img style="max-width:85%" src="{{ suggestion.images[0]}}" alt="">
+						</div>
+						<p class="bold-brown">{{ suggestion.title }}</p>
+					</a>
+				{% endfor %}
+				<hr>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block javascript_custom %}
+	<script>
+		document.querySelector('#sub_header').style.display = 'none';
+	</script>
+{% endblock %}

@@ -51,7 +51,7 @@ class Annonce
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Animal::class, inversedBy="annonces")
+     * @ORM\ManyToOne(targetEntity=Animal::class, inversedBy="annonces", cascade={"remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $animal;

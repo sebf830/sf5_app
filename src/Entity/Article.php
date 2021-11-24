@@ -21,7 +21,7 @@ class Article
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $title;
 
@@ -46,19 +46,24 @@ class Article
     private $author;
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="article")
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="article", cascade={"persist", "remove"})
      */
     private $images;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="articles" ,cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="articles")
      */
     private $category;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $slug;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $publication_status;
 
     public function __construct()
     {
@@ -75,7 +80,7 @@ class Article
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(null|string $title): self
     {
         $this->title = $title;
 
@@ -138,7 +143,7 @@ class Article
         return $this->images;
     }
 
-    public function addImage(Image $image): self
+    public function addImage(null|Image $image): self
     {
         if (!$this->images->contains($image)) {
             $this->images[] = $image;
@@ -177,9 +182,21 @@ class Article
         return $this->slug;
     }
 
-    public function setSlug(string $slug): self
+    public function setSlug(null|string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getPublicationStatus(): ?bool
+    {
+        return $this->publication_status;
+    }
+
+    public function setPublicationStatus(bool $publication_status): self
+    {
+        $this->publication_status = $publication_status;
 
         return $this;
     }

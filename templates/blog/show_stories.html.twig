@@ -6,33 +6,44 @@
 {% block body %}
 	<div class="p-5">
 		<div class="row bg-white bord-light border">
-			<div class="col-md-9 rad-20 p-5">
+			<div class="col-md-9 rad-20 container-card-story">
 				<div class="col-md-12 my-auto">
 					<h4 class="text-center">Les happys stories de DonneLaPatte</h4>
 					<p class="text-center">Retrouvez tous les témoignages des utilisateurs qui ont retrouvé leur animal de compagnie. DonneLaPatte c'est plus de 150 animaux retrouvés par an. Votre contribution active nous permet également de placer de nombreux chats et chiens errants ou abandonnées.</p>
 					<br>
 
 					{% for story in stories %}
-						<div class="bord-light p-5 rad-20 shadow mt-2 story-card">
-							<div class="px-5">
-								<div class="d-flex">
-									<h5 class="text-left bold-brown">{{ story.author.firstname ~ ' ' ~ story.author.lastname}}</h5>
-									&nbsp;&nbsp;&nbsp;
-									<small class="slim-brown" style="display:block;margin-top:2px;">{{ story.date | date('Y-m-d') }}</small>
-								</div>
-								<p style="font-size:16px">{{ story.content }}
-								</p>
+						<div class="bord-light rad-20 shadow story-card">
+							<div class="row text-center">
+								<h5 class="col-lg-6 col-md-12 bold-brown">{{ story.author.firstname ~ ' ' ~ story.author.lastname}}</h5>
+								<small class="col-lg-6 col-md-12 slim-brown" style="display:block;margin-top:2px;">{{ story.date | date('Y-m-d') }}</small>
 							</div>
+							<p style="font-size:16px">{{ story.content }}
+							</p>
 							<img style="border-radius:50%" class="avatar_story bord-light" src="{{ story.author.avatar }}" alt="" width="80" height="80">
 						</div>
 					{% endfor %}
-
+				</div>
+				<br>
+				<div class="navigation">
+					{{ knp_pagination_render(stories, null, {}, {
+   'align': 'center',
+   'size': 'large',
+   'rounded': true,
+})  }}
 				</div>
 			</div>
 			<div class="col-md-3 text-center py-5">
-				<h5 class="mb-5">salut</h5>
-
-
+				<h5 class="mb-5">Voir aussi</h5>
+				{% for suggestion in suggestions %}
+					<a href="{{ path('app_show_article', {slug: suggestion.slug}) }}" style="text-decoration:none;">
+						<div class="w-100">
+							<img style="max-width:85%" src="{{ suggestion.images[0]}}" alt="">
+						</div>
+						<p class="bold-brown">{{ suggestion.title }}</p>
+					</a>
+				{% endfor %}
+				<hr>
 			</div>
 		</div>
 	</div>

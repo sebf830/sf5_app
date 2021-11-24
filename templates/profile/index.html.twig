@@ -1,0 +1,160 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Profile
+{% endblock %}
+
+{% block body %}
+
+	<div class="container p-4">
+		<div class="row gx-2">
+			<div class="col-md-5">
+				<div class="p-3 border bg-white rad-20 mt-2">
+					<h5>Mes informations</h5>
+					<div class="d-flex justify-content-between">
+						<div class="text-center mt-1">
+							<img style="border-radius:50%; border:1px solid grey" src=" {{ asset('uploads/' ~ app.user.avatar) }}" alt="" width="100" height="100">
+						</div>
+						<div class="text-center">
+							<small>{{ app.user.firstname ~ ' ' ~ app.user.lastname }}</small><br>
+							<small>{{ app.user.email }}</small><br>
+							<small>{{ app.user.city }}</small><br>
+							<small>{{ app.user.phone }}</small><br>
+						</div>
+					</div>
+					<a href="{{ path('app_update_informations') }}" class="btn item-red text-white font-weight-bold py-1 w-100 mt-3">modifier</a>
+				</div>
+				<div class="p-3 border bg-white rad-20 mt-2 px-3">
+					<h5>Mon mot de passe</h5>
+					<p>Je crée un nouveau mot de passe en confirmant l'action avec mon ancien mot de passe</p>
+					<form action="{{ path('app_profile') }}" method="post">
+						<input type="password" name="current_password" class="form-control py-0 px-2 mb-2 w-60" placeholder="Entrer votre mot de passe actuel"/>
+						<input type="password" name="new_password" class="form-control py-0 px-2 mb-2" placeholder="Entrer votre nouveau mot de passe" required/>
+						<button type="submit" class="btn item-green text-white py-1 w-100 mt-3">Changer</button>
+					</form>
+				</div>
+				<div class="p-3 border bg-white rad-20 mt-2">
+					<h5>Mes témoignages</h5>
+					{% set count = 0 %}
+					{% for article in app.user.articles %}
+						{% if article.category.name == "temoignages" %}
+							<small class="bold-brown">{{ article.title ? article.title : 'Témoignage'}}</small>
+							posté le :
+							<small>{{ article.date | date('Y/m/d') }}</small><br>
+							{% set count = count + 1%}
+						{% endif %}
+					{% endfor %}
+					{% if count == 0 %}
+						<small>Animal retrouvé? Rédiger un
+							<a href="{{ path('app_publish_story', {name: 'temoignages'}) }}" class="bold-brown">témoignage</a>
+						</small>
+					{% endif %}
+				</div>
+
+			</div>
+			<div class="col-md-7">
+				<div class="p-3 border bg-white rad-20 mt-2">
+					<h5>Mes annonces</h5>
+
+					<table class="table text-center table-annonce">
+						<thead>
+							<tr>
+								<th scope="col"></th>
+								<th scope="col">titre</th>
+								<th scope="col">posté le</th>
+								<th scope="col">supprimer</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% if app.user.annonces | length %}
+								{% for annonce in  app.user.annonces %}
+									<tr class="line">
+										<td><img src="{{ asset('uploads/' ~ annonce.image) }}" alt="" width="30" height="30"></td>
+										<td>{{ annonce.title }}</td>
+										<td>{{ annonce.createdAt | date('Y-m-d') }}</td>
+										<td>
+											<a href="#" class="text-success" data-toggle="modal" data-target="#delete-annonce-modal">
+												<i class="far fa-trash-alt"></i>
+											</a>
+										</td>
+									</tr>
+									{{ include('partials/delete_annonce_modal.html.twig')}}
+
+									<form action="{{ path('app_delete_annonce', {id: annonce.id}) }}" method="post" id="delete-annonce-{{ annonce.id }}" style="display:none">
+										<input type="hidden" name="csrf_token_{{ annonce.id }}" value="{{ csrf_token('annonce_delete_' ~ annonce.id) }}">
+										<input type="hidden" name="_method" value="DELETE">
+									</form>
+								{% endfor %}
+							</tbody>
+						</tbody>
+					</table>
+				{% else %}
+					<small>Poster un annonce maintenant</small>
+				{% endif %}
+			</div>
+			<div class="p-3 border bg-white rad-20 mt-2">
+				<h5>Mes messages</h5>
+				{% if app.user.messagesReceive | length %}
+					{% for message in app.user.messagesReceive %}
+						<a href="#" data-toggle="modal" data-target="#show-message-{{ message.id }}" class="text-secondary text-decoration-none">
+							<small>{{ message.title }}
+								- envoyé par
+								{{ message.sender.firstname ~ ' ' ~ message.sender.lastname }}</small>
+						</a>
+						{{ include('partials/message_profile_modal.html.twig')}}
+
+					{% endfor %}
+				{% else %}
+					<small>Aucun message recu</small>
+				{% endif %}
+				<button class="btn btn-secondary py-1 w-100 mt-3">Modifier</button>
+			</div>
+			<div class="p-3 border bg-white rad-20 mt-2">
+				<h5>Mes articles</h5>
+				{% if app.user.articles | length %}
+					<table class="table text-center table-article">
+						<thead>
+							<tr>
+								<th scope="col">titre</th>
+								<th scope="col">posté le</th>
+								<th scope="col">catégorie</th>
+								<th scope="col">modifier</th>
+								<th scope="col">statut</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for article in app.user.articles %}
+								{% if article.category.name != 'temoignages' %}
+									<tr class="line">
+										<td>{{ article.title }}</td>
+										<td>{{ article.date | date('Y-m-d') }}</td>
+										<td>{{ article.category.name }}</td>
+										<td>
+											<a href="{{ path('app_update_article', {id: article.id}) }}">
+												<i class="far fa-edit"></i>
+											</a>
+										</td>
+										<td>
+											<small>{{ article.publicationStatus == 1 ? 'Affiché dans le blog' : "En attente de validation"}}
+											</small>
+										</td>
+									</tr>
+								{% endif %}
+							{% endfor %}
+						</tbody>
+					</tbody>
+				</table>
+			{% else %}
+				<small>Vous n'avez pas rédigé d'article</small>
+			{% endif %}
+		</tbody>
+	</div>
+	<div class="py-3 px-5 border bg-white rad-20 mt-2 d-flex justify-content-between">
+		<a href="{{ path('app_logout') }}" class="bold-brown">Logout
+			<a href="" class="bold-green">Contacter le site</a>
+			<a href="{{ path('app_publish_article') }}" class="bold-brown">Contribuer au blog</a>
+			<a href="" class="bold-green">supprimer mon compte</a>
+		</div>
+	</div>
+
+</div></div><div class="row gx-2"></div>{% endblock %}{% block javascript_custom %}<script>
+document.querySelector('#sub_header').style.display = 'none';</script>{% endblock %}
