@@ -11,6 +11,7 @@ class AdminRegistrationController extends AbstractController
     #[Route('/admin/registration', name: 'admin_registration')]
     public function index(): Response
     {
+
         return $this->render('admin_registration/index.html.twig');
     }
 }

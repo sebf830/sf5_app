@@ -46,7 +46,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             $user->setLastname($users[$i]['name']['last']);
             $user->setEmail($users[$i]['email']);
             $user->setCity($cities[rand(0, count($cities) - 1)]);
-            $i = 0 ? $user->setRoles(['ROLE_USER']) : $user->setRoles(['ROLE_ADMIN']);
+            $user->setRoles(['ROLE_USER']);
             $user->setPhone('0' . $this->faker->regexify('[0-4]{9}'));
             $user->setPassword($this->hasher->hashPassword($user, $users[$i]['login']['password']));
             $user->setAvatar($users[$i]['picture']['thumbnail']);
