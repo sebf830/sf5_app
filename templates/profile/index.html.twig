@@ -12,7 +12,11 @@
 					<h5>Mes informations</h5>
 					<div class="d-flex justify-content-between">
 						<div class="text-center mt-1">
-							<img style="border-radius:50%; border:1px solid grey" src=" {{ asset('uploads/' ~ app.user.avatar) }}" alt="" width="100" height="100">
+							{% if app.user.avatar %}
+								<img style="border-radius:50%; border:1px solid grey" src=" {{ asset('uploads/' ~ app.user.avatar) }}" alt="" width="100" height="100">
+							{% else %}
+								<img style="border-radius:50%; border:1px solid grey" src=" {{ asset('images/no-avatar.png') }}" alt="" width="100" height="100">
+							{% endif %}
 						</div>
 						<div class="text-center">
 							<small>{{ app.user.firstname ~ ' ' ~ app.user.lastname }}</small><br>
@@ -155,6 +159,7 @@
 			<a href="" class="bold-green">supprimer mon compte</a>
 		</div>
 	</div>
-
-</div></div><div class="row gx-2"></div>{% endblock %}{% block javascript_custom %}<script>
-document.querySelector('#sub_header').style.display = 'none';</script>{% endblock %}
+</div>{% endblock %}{% block javascript_custom %}
+<script>
+	document.querySelector('#sub_header').style.display = 'none';
+</script>{% endblock %}

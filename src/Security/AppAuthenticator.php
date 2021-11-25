@@ -55,9 +55,13 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        $this->flash->success('Authentification réussie, bienvenue !', '');
-        // $2y$10$iaMBSLJiYMDOJVnej7vCjOcRGsVEic4YibdhwhuIi6IhuzArZ1K72
-        return new RedirectResponse($this->urlGenerator->generate('app_home'));
+        if (in_array('ROLE_ADMIN', $token->getRoleNames())) {
+            $this->flash->success("Vous êtes connecté en tant qu'admin", '');
+            return new RedirectResponse($this->urlGenerator->generate('app_admin'));
+        } else {
+            $this->flash->success('Authentification réussie, bienvenue !', '');
+            return new RedirectResponse($this->urlGenerator->generate('app_home'));
+        }
     }
 
     protected function getLoginUrl(Request $request): string
