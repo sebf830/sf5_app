@@ -1,0 +1,30 @@
+{% extends 'layouts/base2.html.twig' %}
+
+{% block title %}Password oublié
+{% endblock %}
+
+{% block body %}
+	<div class="container marketing mt-5">
+		<div class="row mt-5">
+			<h1 class="mt-5 text-center">Renouveller votre mot de passe</h1>
+			<div class="col-lg-5 col-md-8 mx-auto my-5">
+				{% for message in app.flashes('notice') %}
+					<div class="alert alert-info">
+						{{ message }}
+					</div>
+				{% endfor %}
+				<form method="post">
+					<div class="form-group mb-3">
+						<label for="inputEmail">Email</label>
+						<input type="email" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus placeholder="Votre adresse email">
+					</div>
+
+					<button class="btn btn-lg btn-primary" type="submit" formnovalidate>
+						Envoyer
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

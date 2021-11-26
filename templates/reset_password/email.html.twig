@@ -1,0 +1,18 @@
+{% extends 'layouts/base2.html.twig' %}
+
+{% block title %}Password oublié
+{% endblock %}
+
+{% block body %}
+	<div class="container marketing mt-5">
+		<div class="row mt-5">
+			<h1 class="mt-5 text-center">Renouveller votre mot de passe</h1>
+
+			<h5>Mon nouveau password</h5>
+			<p>Bonjour vous avez fait une demande de renouvellement de mot de passe<br>
+				Cliquez sur le lien pour le récupérer',</p>
+			<a href="http://donne-la-patte-dev:8546/{$url}" style="color:white; padding:7px; background-color:lightblue;border-radius:8px;">Renouveller</a>
+		</div>
+	</div>
+
+{% endblock %}

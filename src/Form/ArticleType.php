@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Article;
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -35,7 +36,7 @@ class ArticleType extends AbstractType
                     'class' => 'form-control m-0 py-0 px-2'
                 ]
             ])
-            ->add('content', TextareaType::class, [
+            ->add('content', CKEditorType::class, [
                 'label' => 'Rédigez votre message',
                 'constraints' => [
                     new NotBlank(['message' => 'Veuillez remplir le champs']),

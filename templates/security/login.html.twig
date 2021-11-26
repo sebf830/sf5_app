@@ -26,9 +26,14 @@
 
 					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-					<button class="btn btn-lg btn-login py-2" type="submit" formnovalidate>
-						Valider
-					</button>
+					<div class="d-flex justify-content-between">
+						<button class="btn btn-lg btn-login py-2" type="submit" formnovalidate>
+							Valider
+						</button>
+						<small>
+							<a href="{{ path('reset_password') }}">J'ai oublié mon mot de passe</a>
+						</small>
+					</div>
 				</form>
 				<br>
 				<small>Je n'ai pas encore de compte,
