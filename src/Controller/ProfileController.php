@@ -36,6 +36,7 @@ class ProfileController extends AbstractController
     #[Route('/profile', name: 'app_profile', methods: ['GET', 'POST'])]
     public function index(AnnonceRepository $annonceRepo, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('VIEW_USER_INFORMATIONS', $this->getUser());
 
         //password modify
         if ($request->getMethod() == 'POST') {
@@ -57,6 +58,8 @@ class ProfileController extends AbstractController
     #[Route('/profile/modifier-les-informations', name: 'app_update_informations')]
     public function update_informations(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('UPDATE_USER_INFORMATIONS', $this->getUser());
+
         $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
 
@@ -93,6 +96,8 @@ class ProfileController extends AbstractController
     #[Route('/profile/article/{id}', name: 'app_update_article')]
     public function update_article(Request $request, Article $article, ImageRepository $imageRepo): Response
     {
+        $this->denyAccessUnlessGranted('EDIT', $article);
+
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
@@ -120,9 +125,11 @@ class ProfileController extends AbstractController
         return $this->render('profile/modifier_article.html.twig', ['form' => $form->createView(), 'article' => $article]);
     }
 
-    #[Route('/supprimer/annonce/{id}', name: 'app_delete_annonce', methods: ['GET', 'POST', 'DELETE'])]
-    public function delete_article(Request $request, Annonce $annonce)
+    #[Route('profile/supprimer/annonce/{id}', name: 'app_delete_annonce', methods: ['GET', 'POST', 'DELETE'])]
+    public function delete_annonce(Request $request, Annonce $annonce)
     {
+        $this->denyAccessUnlessGranted('DELETE_ANNONCE', $annonce);
+
         $submittedToken = $request->request->get('csrf_token_' . $annonce->getId());
         if ($this->isCsrfTokenValid('annonce_delete_' . $annonce->getId(), $submittedToken)) {
             $this->em->remove($annonce);

@@ -58,18 +58,17 @@
 			<div class="col-md-7">
 				<div class="p-3 border bg-white rad-20 mt-2">
 					<h5>Mes annonces</h5>
-
-					<table class="table text-center table-annonce">
-						<thead>
-							<tr>
-								<th scope="col"></th>
-								<th scope="col">titre</th>
-								<th scope="col">posté le</th>
-								<th scope="col">supprimer</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% if app.user.annonces | length %}
+					{% if app.user.annonces | length %}
+						<table class="table text-center table-annonce">
+							<thead>
+								<tr>
+									<th scope="col"></th>
+									<th scope="col">titre</th>
+									<th scope="col">posté le</th>
+									<th scope="col">supprimer</th>
+								</tr>
+							</thead>
+							<tbody>
 								{% for annonce in  app.user.annonces %}
 									<tr class="line">
 										<td><img src="{{ asset('uploads/' ~ annonce.image) }}" alt="" width="30" height="30"></td>
@@ -92,7 +91,9 @@
 						</tbody>
 					</table>
 				{% else %}
-					<small>Poster un annonce maintenant</small>
+					<small>Poster une
+						<a class="bold-brown" href="{{ path('app_home') }}">annonce</a>
+						maintenant</small>
 				{% endif %}
 			</div>
 			<div class="p-3 border bg-white rad-20 mt-2">
