@@ -1,20 +1,38 @@
-<!DOCTYPE html>
+{% extends 'layouts/base.html.twig' %}
 
-<title>Hello ContactController!</title>
+{% block title %}Contact
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	<div class="container p-3">
+		<div class="p-5 border rad-20 bg-white">
+			<div class="row">
+				<div class="col-lg-7 bg-white" style="position:relative">
+					<h3>A propos de nous</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					<img class="mt-2" id="imageContact" src="{{ asset('images/contact_img.png') }}" alt="" width="100%">
+					<h2 class="bold-brown text-center mt-5">Lorem ipsum dolor sit amet !</h2>
+				</div>
+				<div class="col-lg-5 p-5">
+					<div class="form px-3 py-4 rad-20" style="background:#fcd3b1">
+						<h5 class="text-center mb-5">Une demande? Ecrivez-nous</h5>
+						{{ form_start(form)}}
+						{{ form_row(form.firstname)}}
+						{{ form_row(form.lastname)}}
+						{{ form_row(form.email)}}
+						{{ form_row(form.message)}}
+						{{ form_row(form.submit)}}
+						{{ form_end(form)}}
+					</div>
+				</div>
+			</div>
+		</div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/src/Controller/ContactController.php'|file_link(0) }}">src/Controller/ContactController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/templates/contact/index.html.twig'|file_link(0) }}">templates/contact/index.html.twig</a></code></li>
-    </ul>
-</div>
-{% endblock %}
+
+	{% endblock %}
+	{% block javascript_custom %}
+		<script>
+			document.querySelector('#sub_header').style.display = 'none';
+		</script>
+	{% endblock %}

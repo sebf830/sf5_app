@@ -19,4 +19,14 @@ class SendMail
 
         $mailer->send($email);
     }
+
+    public function sendContactMessage(MailerInterface $mailer, $from,  $html)
+    {
+        $email = (new TemplatedEmail())
+            ->from($from)
+            ->to('admin@donne-la-patte.fr')
+            ->html($html);
+
+        $mailer->send($email);
+    }
 }
