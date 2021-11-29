@@ -1,52 +1,47 @@
-<div class="container">
-	<div class="container-fluid d-flex justify-content-between" style="margin-bottom:90px;">
-		<img src="{{ asset('images/logo1.png') }}" alt="" width="450" height="90" style="position:absolute;top:20px;">
-		<img class=" dog-banner" src=" {{ asset('images/dog.png') }} " alt=" " width=" 200" height=" 150" style=" position:absolute;top:16px;right:100px;z-index:10;">
+<div class="container-fluid d-flex justify-content-between" style="margin-bottom:90px;">
+	<img src="{{ asset('images/logo1.png') }}" alt="" width="450" height="90" style="position:absolute;top:20px;">
+	<img class=" dog-banner" src=" {{ asset('images/dog.png') }} " alt=" " width=" 200" height=" 150" style=" position:absolute;top:16px;right:100px;z-index:10;">
 
-	</div>
-	<nav class="navbar navbar-expand-md navbar-light mb-0 " aria-label="Fourth navbar example">
-		<div class="container-fluid">
-			<button class="navbar-toggler mt-5" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse col-md-12" id="navbarsExample04">
-				<ul class="navbar-nav me-auto mb-2 mt-5 mb-md-0 text-right mx-auto main-nav w-100">
-					<li class="nav-item">
-						<a class="nav-link text-white" href="{{ path('app_home') }}">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link text-white" href="{{ path('app_found_animals') }}">Trouvés</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link text-white" href="{{ path('app_lost_animals') }}">Perdus</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link text-white" href="{{ path('app_search_animal') }}">Recherche</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link text-white" href="{{ path('blog') }}">Blog</a>
-					</li>
-					<li class="nav-item">
-						{% if app.user %}
-							<a class="nav-link text-white" href="{{ path('app_profile') }}">Compte/Déconnexion</a>
-						{% else  %}
-							<a class="nav-link text-white" href="{{ path('app_login') }}">Connexion</a>
-						{% endif %}
-					</li>
+</div>
+<nav class="navbar navbar-expand-md navbar-light mb-0 " aria-label="Fourth navbar example">
+	<div class="container-fluid">
+		<button class="navbar-toggler mt-5" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse col-md-12" id="navbarsExample04">
+			<ul class="navbar-nav me-auto mb-2 mt-5 mb-md-0 text-right mx-auto main-nav w-100">
+				<li class="nav-item">
+					<a class="nav-link text-white" href="{{ path('app_home') }}">Home</a>
 				</li>
-			</ul>
-		</div>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="{{ path('app_found_animals') }}">Trouvés</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="{{ path('app_lost_animals') }}">Perdus</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="{{ path('app_search_animal') }}">Recherche</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="{{ path('blog') }}">Blog</a>
+				</li>
+				<li class="nav-item">
+					{% if app.user %}
+						<a class="nav-link text-white" href="{{ path('app_profile') }}">Compte/Déconnexion</a>
+					{% else  %}
+						<a class="nav-link text-white" href="{{ path('app_login') }}">Connexion</a>
+					{% endif %}
+				</li>
+			</li>
+		</ul>
 	</div>
-</nav>
-
-<div class="mb-2 py-2 text-center mx-3 brown rad-20" style="padding: 0 50px;border:1px solid lightgrey;" id="sub_header">
-	<div>
-		<p style="color:#85492e;font-size:14px;">Vous trouverez ici la liste des chiens trouvés répertoriés sur notre site. Si vous avez trouvé un chien, n'hésitez pas à l'ajouter en cliquant sur le bouton ci-dessous !</p>
-	</div>
-	<nav class="nav d-flex justify-content-center rounded p-1">
-		<a class="sub-nav-item item-red" href="{{ path('app_publish_lost', {type: 'chien'}) }}">J'ai perdu mon chien</a>
-		<a class="sub-nav-item item-green" href="{{ path('app_publish_lost', {type: 'chat'}) }}">J'ai perdu mon chat</a>
-		<a class="sub-nav-item item-red" href="{{ path('app_publish_found', {type: 'chien'}) }}">J'ai trouvé un chien</a>
-		<a class="sub-nav-item item-green" href="{{ path('app_publish_found', {type: 'chat'}) }}">J'ai trouvé un chat</a>
-	</nav>
-</div></div>
+</div></nav><div class="mb-2 py-2 text-center mx-3 brown rad-20" style="padding: 0 50px;border:1px solid lightgrey;" id="sub_header">
+<div>
+	<p style="color:#85492e;font-size:14px;">Vous trouverez ici la liste des chiens trouvés répertoriés sur notre site. Si vous avez trouvé un chien, n'hésitez pas à l'ajouter en cliquant sur le bouton ci-dessous !</p>
+</div>
+<nav class="nav d-flex justify-content-center rounded p-1">
+	<a class="sub-nav-item item-red" href="{{ path('app_publish_lost', {type: 'chien'}) }}">J'ai perdu mon chien</a>
+	<a class="sub-nav-item item-green" href="{{ path('app_publish_lost', {type: 'chat'}) }}">J'ai perdu mon chat</a>
+	<a class="sub-nav-item item-red" href="{{ path('app_publish_found', {type: 'chien'}) }}">J'ai trouvé un chien</a>
+	<a class="sub-nav-item item-green" href="{{ path('app_publish_found', {type: 'chat'}) }}">J'ai trouvé un chat</a>
+</nav></div>

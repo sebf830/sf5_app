@@ -40,8 +40,9 @@
 		<main class="container">
 			{{ include('partials/nav.html.twig')}}
 			{% block body %}{% endblock %}
-		</div>
+		</main>
 
+		{{ include('partials/footer.html.twig') }}
 
 		{% block javascript_custom %}{% endblock %}
 	</body>
