@@ -32,7 +32,7 @@ class ArticleVoter extends Voter
             return false;
         }
 
-        if ($this->security->isGranted('ROLE_ADMIN'))
+        if ($this->security->isGranted('ROLE_ADMIN') || $this->security->isGranted('ROLE_WRITER'))
             return true;
 
         if (null === $article->getAuthor())

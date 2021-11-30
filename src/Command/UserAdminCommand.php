@@ -15,6 +15,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[AsCommand(
@@ -50,6 +51,7 @@ class UserAdminCommand extends Command
             ->addArgument('city', InputArgument::REQUIRED, 'Renseignez une ville')
             ->addArgument('phone', InputArgument::REQUIRED, 'Renseignez un numero de telephone')
             ->addArgument('email', InputArgument::REQUIRED, 'Renseignez une adresse email')
+            ->addArgument('role', InputArgument::REQUIRED, 'Renseignez un role')
             ->addArgument('password', InputArgument::REQUIRED, 'Renseignez un password')
             ->addArgument('password_confirm', InputArgument::REQUIRED, 'Confirmer le password');
     }
@@ -67,6 +69,7 @@ class UserAdminCommand extends Command
         $this->enterCity($input, $output);
         $this->enterPhone($input, $output);
         $this->enterEmail($input, $output);
+        $this->enterRole($input, $output);
         $this->enterPassword($input, $output);
         $this->enterPasswordConfirm($input, $output);
     }
@@ -78,6 +81,7 @@ class UserAdminCommand extends Command
         $city = $input->getArgument('city');
         $phone = $input->getArgument('phone');
         $email = $input->getArgument('email');
+        $role = $input->getArgument('role');
         $password = $input->getArgument('password');
         $passwordConfirm = $input->getArgument('password_confirm');
 
@@ -88,7 +92,7 @@ class UserAdminCommand extends Command
         $user->setPhone($phone);
         $user->setEmail($email);
         $user->setPassword($this->hasher->hashPassword($user, $passwordConfirm));
-        $user->setRoles(['ROLE_ADMIN']);
+        $user->setRoles($role);
 
         $this->em->persist($user);
         $this->em->flush();
@@ -98,7 +102,18 @@ class UserAdminCommand extends Command
         return Command::SUCCESS;
     }
 
-
+    private function enterRole(InputInterface $input, OutputInterface $output)
+    {
+        $helper = $this->getHelper('question');
+        $startQuestion = new ChoiceQuestion(
+            "Choisissez un role pour cet utilisateur : (ROLE_ADMIN) ",
+            ['ROLE_ADMIN', 'ROLE_WRITER'],
+            'ROLE_ADMIN'
+        );
+        $startQuestion->setErrorMessage('Choix invalide, réessayez');
+        $essai[] = $helper->ask($input, $output, $startQuestion);
+        $input->setArgument('role', $essai);
+    }
 
     public function enterEmail(InputInterface $input, OutputInterface $output)
     {

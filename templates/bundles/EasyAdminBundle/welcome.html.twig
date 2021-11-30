@@ -1,0 +1,36 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+
+{% block main %}
+	<div class="container">
+		<h5>
+			Dashboard Admin de DonneLaPatte - Vous etes connécté en tant que
+			{{ app.user.email }}</h5>
+
+		{% if app.user.roles == 'ROLE_ADMIN' %}
+			<p>Vous avez
+				<span class="badge" style="background-color:#f0c7d9">5</span>
+				messages de contact non lus
+			</p>
+		{% endif %}
+
+		<p class="mt-5 bold-brown">En ce moment sur DonneLaPatte :</p>
+		<p>
+			<span class="badge badge-warning text-success p-2">{{ '' |  userStatistics }}</span>
+			d'utilisateurs inscrits
+		</p>
+		<p>
+			<span class="badge badge-info text-black p-2">{{ '' |  annonceStatistics }}</span>
+			annonces postées
+		</p>
+		<p>
+			<span class="badge badge-success text-warning p-2">{{ '' |  publishedArticleStatistics }}</span>
+			articles de blog postés
+		</p>
+		<p>
+			<span class="badge p-2" style="background-color:#f0c7d9;color:blue">{{ '' |  messageStatistics }}</span>
+			messages utilisateur
+		</p>
+	</div>
+{% endblock %}

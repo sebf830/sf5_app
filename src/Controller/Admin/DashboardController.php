@@ -23,20 +23,21 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
-        $routeBuilder = $this->get(AdminUrlGenerator::class);
-        return $this->redirect($routeBuilder->setController(UserCrudController::class)->generateUrl());
+        // $routeBuilder = $this->get(AdminUrlGenerator::class);
+        // return $this->redirect($routeBuilder->setController(UserCrudController::class)->generateUrl());
+        return parent::index();
     }
 
 
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Donne la patte Dashboard');
+            ->setTitle('DonneLaPatte Dashboard');
     }
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linktoDashboard('Home', 'fa fa-home');
+        yield MenuItem::linktoDashboard('Accueil site', 'fa fa-home');
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
         yield MenuItem::linkToCrud('Annonces', 'fas fa-user-edit', Annonce::class);
         yield MenuItem::linkToCrud('Articles', 'fas fa-paw', Article::class);
