@@ -30,7 +30,11 @@
 				<hr>
 				<h5 class="mb-3">Aller vers</h5>
 				{% for category in categories %}
-					<a class="blog_category" href="{{ path('app_article_category', {slug: category.slug}) }}">{{ category.name }}</a><br>
+					{% if category.name == 'temoignages'%}
+						<a class="blog_category" href="{{ path('app_show_stories', {name: 'temoignages'} ) }}">{{ category.name }}</a><br>
+					{% else %}
+						<a class="blog_category" href="{{ path('app_article_category', {slug: category.slug}) }}">{{ category.name }}</a><br>
+					{% endif %}
 				{% endfor %}
 
 			</div>

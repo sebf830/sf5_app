@@ -28,7 +28,7 @@ class DashboardWriterController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linktoDashboard('<a class="text-success text-center" href="/home">Accueil site</a>');
         yield MenuItem::linkToCrud('Articles', 'fas fa-paw', Article::class);
     }
 }

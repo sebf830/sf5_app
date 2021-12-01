@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="icon" href="{{ asset('images/logo.ico') }}">
+		{{ encore_entry_link_tags('app') }}
+		{{ encore_entry_script_tags('app') }}
+
+		<title>erreur 403</title>
+
+	</head>
+	<body>
+		<div class="container p-5">
+			<h1 class="text-center bold-brown" style="text-align:center">Accès refusé</h1>
+
+			<p class="my-4 text-secondary text-center">Vous n'avez pas les droits suffisants pour accéder à ce contenu<br>
+				Veuillez contacter l'administrateur du site via la rubrique "contact".</p>
+			<div class="col mx-auto text-center">
+				<img src="{{ asset('images/403.png') }}" alt="" width="460" height="380"><br>
+				<a href="{{ path('app_home') }}" class="btn item-green text-white mt-3 px-5">Retour au site</a>
+			</div>
+		</div>
+	</body>
+</html>

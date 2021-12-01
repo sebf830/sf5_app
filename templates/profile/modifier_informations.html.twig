@@ -22,7 +22,11 @@
 					{{ form_row(form.city)}}
 					<div class="row">
 						<div class="col-md-3 mt-3">
-							<img src="{{ asset('uploads/' ~ app.user.avatar) }}" alt="" width="100" height="100"><br>
+							{% if app.user.avatar %}
+								<img style="border-radius:50%; border:1px solid grey" src=" {{ asset('uploads/' ~ app.user.avatar) }}" alt="" width="100" height="100">
+							{% else %}
+								<img style="border-radius:50%; border:1px solid grey" src=" {{ asset('images/no-avatar.png') }}" alt="" width="100" height="100">
+							{% endif %}
 						</div>
 						<div class="col-md-9 mt-3">
 							{{ form_row(form.avatar)}}
