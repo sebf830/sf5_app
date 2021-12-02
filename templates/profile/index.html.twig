@@ -111,7 +111,6 @@
 				{% else %}
 					<small>Aucun message recu</small>
 				{% endif %}
-				<button class="btn btn-secondary py-1 w-100 mt-3">Modifier</button>
 			</div>
 			<div class="p-3 border bg-white rad-20 mt-2" style="overflow:auto">
 				<h5>Mes articles</h5>
@@ -158,7 +157,6 @@
 			<a href="{{ path('app_contact') }}" class="bold-green">Contacter le site</a>
 			<a href="{{ path('app_publish_article') }}" class="bold-brown">Contribuer au blog</a>
 			<a href="#" class="bold-green" data-toggle="modal" data-target="#delete-account-modal">supprimer mon compte</a>
-
 		</div>
 		{{ include('partials/delete_account_modal.html.twig')}}
 	</div>

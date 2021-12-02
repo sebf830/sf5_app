@@ -8,6 +8,7 @@ use App\Entity\Article;
 use App\Entity\Message;
 use App\Entity\Category;
 use App\Controller\Admin\UserCrudController;
+use App\Entity\Blacklist;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -43,5 +44,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Articles', 'fas fa-paw', Article::class);
         yield MenuItem::linkToCrud('Categories', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('Messages', 'fas fa-envelope', Message::class);
+        yield MenuItem::linkToCrud('Blacklist', 'fas fa-skull-crossbones', Blacklist::class);
     }
 }

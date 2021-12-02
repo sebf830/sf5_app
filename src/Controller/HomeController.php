@@ -13,6 +13,7 @@ class HomeController extends AbstractController
     #[Route('/home', name: 'app_home')]
     public function index(Request $request, AnnonceRepository $annonceRepo): Response
     {
+
         $limit = 10;
         $page = (int)$request->query->get('page', 1);
 

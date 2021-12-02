@@ -2,14 +2,19 @@
 
 namespace App\Security;
 
+use App\Repository\UserRepository;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
@@ -25,13 +30,22 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
 
     private UrlGeneratorInterface $urlGenerator;
 
-
+    private FlashBagInterface $flashBag;
     private FlashyNotifier $flash;
+    private UserRepository $userRepo;
+    private Session $session;
+    private RequestStack $requestStack;
 
-    public function __construct(UrlGeneratorInterface $urlGenerator, FlashyNotifier $flash)
-    {
+    public function __construct(
+        UrlGeneratorInterface $urlGenerator,
+        FlashyNotifier $flash,
+        UserRepository $userRepo,
+        FlashBagInterface $flashBag
+    ) {
         $this->urlGenerator = $urlGenerator;
         $this->flash = $flash;
+        $this->flashBag = $flashBag;
+        $this->userRepo = $userRepo;
     }
 
     public function authenticate(Request $request): PassportInterface
@@ -55,13 +69,35 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
+        $identifier = $token->getUser()->getUserIdentifier();
+        $user = $this->userRepo->findOneBy(['email' => $identifier]);
+        $blacklistedID = $user->getBlacklist() ?? null;
+
+        if ($blacklistedID) {
+            $token->setAuthenticated(false);
+            $this->flashBag->add("violation", "En raison d'une ou plusieurs violation de nos conditions d'utilisation, votre compte est bloqué");
+            return new RedirectResponse($this->urlGenerator->generate(self::LOGIN_ROUTE));
+        }
+
         if (in_array('ROLE_ADMIN', $token->getRoleNames())) {
-            $this->flash->success("Vous êtes connecté en tant qu'admin", '');
             return new RedirectResponse($this->urlGenerator->generate('app_admin'));
+        } elseif (in_array('ROLE_WRITER', $token->getRoleNames())) {
+            return new RedirectResponse($this->urlGenerator->generate('app_writer'));
         } else {
             $this->flash->success('Authentification réussie, bienvenue !', '');
             return new RedirectResponse($this->urlGenerator->generate('app_home'));
         }
+    }
+
+    private function isBlackListed(TokenInterface $securityToken): bool
+    {
+        $identifier = $securityToken->getUser()->getUserIdentifier();
+        $user = $this->userRepo->findOneBy(['email' => $identifier]);
+
+        if ($user->getBlacklist()->getId() != null) {
+            return true;
+        }
+        return false;
     }
 
     protected function getLoginUrl(Request $request): string

@@ -103,6 +103,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $contacts;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Blacklist::class, inversedBy="users")
+     */
+    private $blacklist;
+
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
@@ -471,5 +476,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    public function getBlacklist(): ?Blacklist
+    {
+        return $this->blacklist;
+    }
+
+    public function setBlacklist(?Blacklist $blacklist): self
+    {
+        $this->blacklist = $blacklist;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->firstname . ' ' . $this->lastname . ' : ' . $this->email;
     }
 }

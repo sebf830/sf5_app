@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashboardWriterController extends AbstractDashboardController
 {
     /**
-     * @Route("/writer", name="writer")
+     * @Route("/writer", name="app_writer")
      */
     public function index(): Response
     {

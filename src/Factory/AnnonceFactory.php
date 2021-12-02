@@ -52,7 +52,7 @@ class AnnonceFactory extends AbstractController
         $image = $data['image'] ?? null;
         if ($image != null) {
             $fichier = md5(uniqid()) . '.' . $image->guessExtension();
-            $image->move($this->getParameter('uploads_directory'), $fichier);
+            $image->move($this->getParameter('upload_directory'), $fichier);
             $annonce->setImage($fichier);
         } else {
             $annonce->setImage('default_animal.png');
