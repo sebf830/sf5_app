@@ -157,10 +157,14 @@
 		<a href="{{ path('app_logout') }}" class="bold-brown">Logout
 			<a href="{{ path('app_contact') }}" class="bold-green">Contacter le site</a>
 			<a href="{{ path('app_publish_article') }}" class="bold-brown">Contribuer au blog</a>
-			<a href="" class="bold-green">supprimer mon compte</a>
+			<a href="#" class="bold-green" data-toggle="modal" data-target="#delete-account-modal">supprimer mon compte</a>
+
 		</div>
+		{{ include('partials/delete_account_modal.html.twig')}}
 	</div>
-</div>{% endblock %}{% block javascript_custom %}
-<script>
-	document.querySelector('#sub_header').style.display = 'none';
-</script>{% endblock %}
+{% endblock %}
+{% block javascript_custom %}
+	<script>
+		document.querySelector('#sub_header').style.display = 'none';
+	</script>
+{% endblock %}

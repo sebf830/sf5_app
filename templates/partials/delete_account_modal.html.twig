@@ -1,0 +1,19 @@
+<div class="modal fade" id="delete-account-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Supprimer mon compte</h5>
+				<span aria-hidden="true" class="bold-brown close" data-dismiss="modal" aria-label="Close">
+					<i class="fas fa-times-circle fa-2x"></i>
+				</span>
+			</div>
+			<div class="modal-body">
+				Vous allez être redirigé vers la page de suppression de votre compte. Souhaitez-vous poursuivre l'opération?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">non</button>
+				<a type="button" href="{{ path('app_delete_annonce', {id:app.user.id}) }}" class="btn btn-primary">oui</a>
+			</div>
+		</div>
+	</div>
+</div>

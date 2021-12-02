@@ -1,0 +1,31 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Profile
+{% endblock %}
+
+{% block body %}
+	<div class="container p-5">
+		<div class="p-5 border bg-white text-center">
+			<h5>Suppression de compte</h5>
+			<p>Vous êtes sur le point de supprimer votre compte<br>
+				Toutes vos données personnelles ainsi que celles publiées sur le site seront définitivement supprimées.<br>
+				Nous ne conservons aucune données vous concernant dés lors que vous procédez à une desinscription.</p>
+
+			<p class="bold-brown">Pour valider la suppression veuillez recopier la phrase soulignée ci-dessous en respectant les caractères et majuscules</p>
+
+			<p class="text-decoration-underline">Supprimer-Mon-Compte-{{ app.user.firstname | capitalize }}-{{ app.user.lastname | capitalize }}</p>
+			<form method="post" action="{{ path('app_delete_annonce', {id: app.user.id}) }}">
+				<input type="text" name="passPhrase" placeholder="entrer la passe-phrase ici" class="w-50 p-2 form-control mx-auto" required>
+				<input type="hidden" name="csrf_token_delete_account" value="{{ csrf_token('delete_account') }}">
+				<input type="hidden" name="_method" value="DELETE">
+				<button type="submit" class="btn item-green border mt-2">Supprimmer mon compte maintenant</button>
+			</form>
+		</div>
+	</div>
+
+{% endblock %}
+{% block javascript_custom %}
+	<script>
+		document.querySelector('#sub_header').style.display = 'none';
+	</script>
+{% endblock %}

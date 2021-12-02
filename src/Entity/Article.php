@@ -41,7 +41,7 @@ class Article
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles", cascade={"remove"})
      */
     private $author;
 

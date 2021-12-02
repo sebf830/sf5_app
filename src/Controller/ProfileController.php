@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use DateTime;
+use App\Entity\User;
 use App\Entity\Image;
 use App\Form\UserType;
 use App\Entity\Annonce;
@@ -20,6 +21,8 @@ use Symfony\Component\HttpFoundation\Request;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProfileController extends AbstractController
@@ -137,5 +140,30 @@ class ProfileController extends AbstractController
             $this->flash->success('Annonce correctement supprimé', '');
         }
         return $this->redirectToRoute('app_profile');
+    }
+
+    #[Route('profile/supprimer/compte/{id}', name: 'app_delete_annonce', methods: ['GET', 'POST', 'DELETE'])]
+    public function delete_account(Request $request, User $user, RequestStack $requestStack)
+    {
+        $paramFirst = ucfirst($this->getUser()->getFirstname());
+        $paramLast = ucfirst($this->getUser()->getLastname());
+        $passPhrase = "Supprimer-Mon-Compte-{$paramFirst}-{$paramLast}";
+
+        // $this->denyAccessUnlessGranted('DELETE_ANNONCE', $annonce);
+        $submittedToken = $request->request->get('csrf_token_delete_account');
+
+        if (
+            $this->isCsrfTokenValid('delete_account', $submittedToken)  &&
+            $request->request->get('passPhrase') == $passPhrase
+        ) {
+            $curentSession = $requestStack->getCurrentRequest()->getSession();
+            $curentSession->invalidate();
+
+            $this->em->remove($user);
+            $this->em->flush();
+            $this->flash->success('Votre compte a bien été supprimé, au revoir', '');
+            return $this->redirectToRoute('app_home');
+        }
+        return $this->render('profile/supprimer_account.html.twig');
     }
 }

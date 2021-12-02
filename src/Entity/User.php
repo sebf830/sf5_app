@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="Il y a déjà un compte avec cet email")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -59,12 +59,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $city;
 
     /**
-     * @ORM\OneToMany(targetEntity=Annonce::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Annonce::class, mappedBy="user", cascade={"remove"})
      */
     private $annonces;
 
     /**
-     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="author")
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="author", cascade={"remove"})
      */
     private $articles;
 
@@ -74,22 +74,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $avatar;
 
     /**
-     * @ORM\OneToMany(targetEntity=Animal::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Animal::class, mappedBy="user", cascade={"remove"})
      */
     private $animal;
 
     /**
-     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="writer", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="writer", orphanRemoval=true, cascade={"remove"})
      */
     private $messages;
 
     /**
-     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="sender", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="sender", orphanRemoval=true, cascade={"remove"})
      */
     private $messages_send;
 
     /**
-     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="receiver", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="receiver", orphanRemoval=true, cascade={"remove"})
      */
     private $messages_receive;
 
@@ -99,7 +99,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $phone;
 
     /**
-     * @ORM\OneToMany(targetEntity=Contact::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Contact::class, mappedBy="user", cascade={"remove"})
      */
     private $contacts;
 
