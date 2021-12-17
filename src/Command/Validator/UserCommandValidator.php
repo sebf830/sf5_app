@@ -2,12 +2,7 @@
 
 namespace App\Command\Validator;
 
-use RuntimeException;
 use InvalidArgumentException;
-use Symfony\Component\Console\Style\SymfonyStyle;
-
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 
 class UserCommandValidator
 {
@@ -38,11 +33,11 @@ class UserCommandValidator
     public function validateFirstname(string $firstnameEnter): string
     {
         if ($firstnameEnter == ' ' || is_int($firstnameEnter)) {
-            throw new InvalidArgumentException("Veuillez saisir un prénom");
+            throw new InvalidArgumentException("Veuillez saisir un prénom sans accent ni caractère spécial");
         }
         $firstnameRegex = "/^[a-zA-Z]{2,}$/";
         if (!preg_match($firstnameRegex, $firstnameEnter)) {
-            throw new InvalidArgumentException("Veuillez saisir un prénom sans chiffre ou caractere spécial, 2 caracteres minimum");
+            throw new InvalidArgumentException("Veuillez saisir un prénom sans chiffre, accent, caractere spécial, 2 caracteres minimum");
         }
         return $firstnameEnter;
     }
@@ -50,11 +45,11 @@ class UserCommandValidator
     public function validateLastname(string $lastnameEnter): string
     {
         if ($lastnameEnter == ' ' || is_int($lastnameEnter)) {
-            throw new InvalidArgumentException("Veuillez saisir un prénom");
+            throw new InvalidArgumentException("Veuillez saisir un nom");
         }
         $lastnameRegex = "/^[a-zA-Z]{2,}$/";
         if (!preg_match($lastnameRegex, $lastnameEnter)) {
-            throw new InvalidArgumentException("Veuillez saisir un nom sans chiffre ou caractere spécial, 2 caracteres minimum");
+            throw new InvalidArgumentException("Veuillez saisir un nom sans chiffre, accent, caractere spécial, 2 caracteres minimum");
         }
         return $lastnameEnter;
     }
@@ -74,7 +69,7 @@ class UserCommandValidator
     public function validatePhone(string $phoneEnter): string
     {
         if ($phoneEnter == '') {
-            throw new InvalidArgumentException("Veuillez saisir un prénom");
+            throw new InvalidArgumentException("Veuillez saisir un numero de téléphone");
         }
         $phoneRegex = "/^[0-9]{10,10}$/";
         if (!preg_match($phoneRegex, $phoneEnter)) {

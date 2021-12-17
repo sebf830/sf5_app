@@ -9,7 +9,12 @@
 		<div class="p-2 border bg-white rad-20 mx-5">
 			<div class="row">
 				<div class="col-md-10 p-5 mx-auto">
-					<h5>Modifier mes informations</h5>
+					<div class="d-flex justify-content-between">
+						<h5 class="h3 mb-3 font-weight-normal">Modifier mes informations</h5>
+						<a href="{{ path('app_profile') }}" class="text-dark">
+							<i class="fas fa-home"></i>
+						</a>
+					</div>
 					{{ form_start(form)}}
 					<div class="row">
 						<div class="col">{{ form_row(form.firstname)}}</div>

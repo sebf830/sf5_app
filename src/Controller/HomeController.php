@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home')]
-    public function index(Request $request, AnnonceRepository $annonceRepo): Response
+    public function home(Request $request, AnnonceRepository $annonceRepo): Response
     {
 
         $limit = 10;
@@ -27,5 +27,11 @@ class HomeController extends AbstractController
             'total' => $total,
             'limit' => $limit,
         ]);
+    }
+
+    #[Route('/', name: 'index')]
+    public function index(): Response
+    {
+        return $this->redirectToRoute('app_home');
     }
 }

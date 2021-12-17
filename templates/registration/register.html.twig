@@ -12,7 +12,12 @@
 				{{ form_start(registrationForm) }}
 
 				<div class="row">
-					<h3>Inscription</h3>
+					<div class="d-flex justify-content-between">
+						<h3 class="h3 mb-3 font-weight-normal">Inscription</h3>
+						<a href="{{ path('app_home') }}" class="text-dark">
+							<i class="fas fa-home"></i>
+						</a>
+					</div>
 					<div class="col-md-6 mt-3">
 						<div class="mb-3">
 							{{ form_row(registrationForm.firstname) }}

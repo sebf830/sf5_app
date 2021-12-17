@@ -1,3 +1,5 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
 body {
     background-image: url('/public/images/background4.jpg');
     background-repeat: repeat;
@@ -278,6 +280,7 @@ li {
     .button_link_card {
         margin: 20px 0;
     }
+
     .subNavTextOrange {
         height: 4em;
         width: 85%;
@@ -285,12 +288,14 @@ li {
         bottom: -20px;
         left: 8%;
     }
+
     .engage_h3 {
         font-size: 18px;
         position: absolute;
         text-align: left;
         bottom: 20px;
     }
+
     .engage_a {
         display: none;
     }
@@ -306,26 +311,32 @@ li {
     .engage_p {
         display: none;
     }
+
     .main-nav li {
         padding: 0 18px;
         font-size: 15px;
     }
+
     .container-card-story {
         padding: 10px;
     }
+
     .story-card {
         padding: 15px;
         padding-top: 55px;
         margin-top: 40px;
     }
+
     .avatar_story {
         left: 38%;
         top: -32px;
     }
+
     .story-card h5 {
         width: 100%;
         text-align: center;
     }
+
     .story-card small {
         margin-bottom: 20px;
     }

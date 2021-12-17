@@ -9,10 +9,12 @@
 import './styles/app.css';
 
 // start the Stimulus application
-import './bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
-import 'jquery/dist/jquery.min.js'
+import $ from 'jquery';
+require('bootstrap');
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/js/bootstrap.min.js';
+// import 'jquery/dist/jquery.min.js'
+// import '@popperjs/core/dist/cjs/popper.js';
 
 
 $('.valid_message').on('click', function (e) {
